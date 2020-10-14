@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>따릉이 따고</title>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="CodedThemes">
+      <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+      <meta name="author" content="CodedThemes">
+      <!-- Favicon icon -->
+      <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+      <!-- Google font-->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+      <!-- Required Fremwork -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+      <!-- themify-icons line icon -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
+      <!-- ico font -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
+      <!-- Style.css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+  </head>
+
+  <body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <a href="{% url 'index' %}">
+                            <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                            </li>
+
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="ti-fullscreen"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <a href="#!">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-pink"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">John Doe</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Joseph William</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Sara Soudein</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="user-profile header-notification">
+                                <a href="#!">
+                                    <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image">
+                                    <span>John Doe</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <li>
+                                        <a href="#!">
+                                            <i class="ti-settings"></i> Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-email"></i> My Messages
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-lock"></i> Lock Screen
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-normal-sign-in.html">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                        <div class="pcoded-inner-navbar main-menu">
+                            <div class="">
+                                <div class="main-menu-header">
+                                    <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
+                                    <div class="user-details">
+                                        <span>John Doe</span>
+                                        <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="main-menu-content">
+                                    <ul>
+                                        <li class="more-details">
+                                            <a href="#"><i class="ti-user"></i>View Profile</a>
+                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
+                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pcoded-search">
+                                <span class="searchbar-toggle">  </span>
+                                <div class="pcoded-search-box ">
+                                    <input type="text" placeholder="Search">
+                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="{% url 'index' %}">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+<!--                                </li>-->
+<!--                                <li class="pcoded-hasmenu">-->
+<!--                                    <a href="javascript:void(0)">-->
+<!--                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>-->
+<!--                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Components</span>-->
+<!--                                        <span class="pcoded-mcaret"></span>-->
+<!--                                    </a>-->
+<!--                                    <ul class="pcoded-submenu">-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="accordion.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="breadcrumb.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="button.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="tabs.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="color.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="label-badge.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Label Badge</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="tooltip.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="typography.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Typography</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="notification.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class=" ">-->
+<!--                                            <a href="icon-themify.html">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Icon</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Forms &amp; Tables</div>-->
+<!--                            <ul class="pcoded-item pcoded-left-item">-->
+<!--                                <li>-->
+<!--                                    <a href="form-elements-component.html">-->
+<!--                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>-->
+<!--                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Form Components</span>-->
+<!--                                        <span class="pcoded-mcaret"></span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="bs-basic-table.html">-->
+<!--                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>-->
+<!--                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>-->
+<!--                                        <span class="pcoded-mcaret"></span>-->
+<!--                                    </a>-->
+                                </li>
+
+                            </ul>
+
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Chart &amp; Maps</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="chart.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="map-google.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="auth-normal-sign-in.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="auth-sign-up.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="sample-page.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+<!--                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Other</div>-->
+<!--                            <ul class="pcoded-item pcoded-left-item">-->
+<!--                                <li class="pcoded-hasmenu ">-->
+<!--                                    <a href="javascript:void(0)">-->
+<!--                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>-->
+<!--                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>-->
+<!--                                        <span class="pcoded-mcaret"></span>-->
+<!--                                    </a>-->
+<!--                                    <ul class="pcoded-submenu">-->
+<!--                                        <li class="">-->
+<!--                                            <a href="javascript:void(0)">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class="pcoded-hasmenu ">-->
+<!--                                            <a href="javascript:void(0)">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                            <ul class="pcoded-submenu">-->
+<!--                                                <li class="">-->
+<!--                                                    <a href="javascript:void(0)">-->
+<!--                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>-->
+<!--                                                        <span class="pcoded-mcaret"></span>-->
+<!--                                                    </a>-->
+<!--                                                </li>-->
+<!--                                            </ul>-->
+<!--                                        </li>-->
+<!--                                        <li class="">-->
+<!--                                            <a href="javascript:void(0)">-->
+<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
+<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>-->
+<!--                                                <span class="pcoded-mcaret"></span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-header start -->
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+
+                                            <div class="col-lg-8">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-map bg-c-pink"></i>
+                                                    <div class="d-inline">
+                                                       <h4>따릉이 실시간 정보</h4>
+                                                       <span>Kakao Map</span>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-lg-4">
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="{% url 'index' %}">
+                                                            <i class="icofont icofont-home"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Maps</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">따릉이 대여소</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Bootstrap tab card start -->
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <!-- Row start -->
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-xl-6">
+                                                                <div class="sub-title">Default</div>
+                                                                <!-- Nav tabs -->
+                                                                <ul class="nav nav-tabs  tabs" role="tablist">
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- Tab panes -->
+                                                                <div class="tab-content tabs card-block">
+                                                                    <div class="tab-pane active" id="home1" role="tabpanel">
+                                                                        <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="road1" role="tabpanel">
+                                                                        <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="messages1" role="tabpanel">
+                                                                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-xl-6">
+                                                                <div id="map" style="width:100%;height:500px;"></div>
+                                                            </div>
+                                                        <!-- Row end -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b06a82b0f56b0a67f916b342c5feb34f"></script>
+<script>
+
+var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+    center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
+    level : 4 // 지도의 확대 레벨
+});
+
+<!--// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다-->
+<!--var zoomControl = new kakao.maps.ZoomControl();-->
+<!--map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);-->
+
+<!--// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다-->
+<!--kakao.maps.event.addListener(map, 'zoom_changed', function() {-->
+
+<!--    // 지도의 현재 레벨을 얻어옵니다-->
+<!--    var level = map.getLevel();-->
+
+<!--    var message = '현재 지도 레벨은 ' + level + ' 입니다';-->
+<!--    var resultDiv = document.getElementById('result');-->
+<!--    resultDiv.innerHTML = message;-->
+
+<!--});-->
+
+var positions =[];
+{% for value in api_dict %}
+var num = {{ value.parkingBikeTotCnt }};
+if (num == 0){
+var positionsRed = [
+    {
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsRed)
+}else if (num <= 2){
+var positionsYellow = [
+    {
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsYellow)
+}else{
+var positionsBlue = [
+    {
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsBlue)
+}
+{% endfor %}
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+
+        var locPosition = new kakao.maps.LatLng(lat, lon)
+
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition);
+
+      });
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
+
+    displayMarker(locPosition);
+}
+
+for (var i = 0; i < positions.length; i ++) {
+        var customOverlay1 = new kakao.maps.CustomOverlay({
+                    content: positions[i].content,
+                    position: positions[i].latlng,
+                    map: map
+        });
+        var customOverlay2 = new kakao.maps.CustomOverlay({
+            content: positions[i].title,
+            position: positions[i].latlng,
+            yAnchor: 1.8,
+            map: map
+
+        });
+}
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);
+}
+
+</script>
+                                                                                                                </div>
+                                                </div>
+                                                <!-- Bootstrap tab card end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                            <!-- Basic map end -->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-12 col-xl-6">-->
+<!--                                            &lt;!&ndash; Markers map start &ndash;&gt;-->
+<!--                                            <div class="card">-->
+<!--                                                <div class="card-header">-->
+<!--                                                    <h5>Markers</h5>-->
+<!--                                                    <span>Maps shows <code>location</code> of the place</span>-->
+<!--                                                    <div class="card-header-right">                                                             <i class="icofont icofont-spinner-alt-5"></i>                                                         </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="card-block">-->
+<!--                                                    <div id="markermap" class="set-map"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; Markers map end &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-lg-12 col-xl-6">-->
+<!--                                            &lt;!&ndash; Overlay map start &ndash;&gt;-->
+<!--                                            <div class="card">-->
+<!--                                                <div class="card-header">-->
+<!--                                                    <h5>Street View</h5>-->
+<!--                                                    <span>Map shows view of street</span>-->
+<!--                                                    <div class="card-header-right">                                                             <i class="icofont icofont-spinner-alt-5"></i>                                                         </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="card-block">-->
+<!--                                                    <div id="overlayermap" class="set-map"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; Overlay map start &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-12 col-xl-6">-->
+<!--                                            &lt;!&ndash; Street View map start &ndash;&gt;-->
+<!--                                            <div class="card">-->
+<!--                                                <div class="card-header">-->
+<!--                                                    <h5>Polygon</h5>-->
+<!--                                                    <span>Map shows Polygon Area</span>-->
+<!--                                                    <div class="card-header-right">                                                             <i class="icofont icofont-spinner-alt-5"></i>                                                         </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="card-block">-->
+<!--                                                    <div id="polymap" class="set-map"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; Street View map end &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                 </div>-->
+                            </div>
+                            <!-- Page body end -->
+                        </div>
+                    </div>
+                    <!-- Main-body end -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Warning Section Starts -->
+<!-- Older IE warning message -->
+    <!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="{% static 'assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="{% static 'assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="{% static 'assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="{% static 'assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="{% static 'assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
+<!-- Required Jquery -->
+<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/modernizr/css-scrollbars.js' %}"></script>
+<!-- classie js -->
+<script type="text/javascript" src="{% static 'assets/js/classie/classie.js' %}"></script>
+<!-- Google map js -->
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&amp;sensor=true"></script>
+<!-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+<script type="text/javascript" src="{% static 'assets/pages/google-maps/gmaps.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/pages/google-maps/jquery.gmaps.js' %}"></script>
+<!-- Custom js -->
+<!-- <script type="text/javascript" src="{% static 'assets/pages/google-maps/google-maps.js"></script> -->
+<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'assets/js/demo-12.js' %}"></script>
+<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+</body>
+
+</html>
