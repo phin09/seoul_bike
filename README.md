@@ -72,3 +72,4 @@ $ git clone https://github.com/phin09/seoul_bike
 clone하면 곱게 폴더로 묶여서 다운됨. 다운 받은 프로젝트 폴더 안에서 git bash 열기.   
 &nbsp;  
 
+"변경 연습"
