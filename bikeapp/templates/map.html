@@ -2,7 +2,7 @@
 <html lang="en">
 {% load static %}
 <head>
-    <title>따릉이 따고</title>
+    <title>따릉이 타고 삼천리</title>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -473,7 +473,7 @@
                                                                 <div id="map" style="width:100%;height:500px;"></div>
                                                             </div>
                                                         <!-- Row end -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b06a82b0f56b0a67f916b342c5feb34f"></script>
+<script type="text/javascript" src={{kakao_key}}></script>
 <script>
 
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
