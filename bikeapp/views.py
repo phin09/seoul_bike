@@ -1,20 +1,39 @@
 from django.shortcuts import render
 from django.urls import path, include
 import pandas as pd
-import json
+import os, json
+from seoulbike.settings import BASE_DIR
+from django.core.exceptions import ImproperlyConfigured
 import requests
 from time import ctime
 import time
 import sqlite3
-# Create your views here.
+
 
 def index(request):
     return render(request, 'index.html')
 
+
 def bikeMap(request):
-    api_urls = ["http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/1/1000",
-                "http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/1001/2000",
-                "http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/2001/3000"
+    secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+    with open(secret_file) as f:
+        secrets = json.loads(f.read())
+
+    def get_secret(setting, secrets=secrets):
+        try:
+            #print("check: ", secrets[setting])
+            return secrets[setting]
+        except KeyError:
+            error_msg = "Set the {} environment variable in secrets.json".format(setting)
+            raise ImproperlyConfigured(error_msg)
+
+    SEOUL_KEY = get_secret("SEOUL_KEY")
+    KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
+
+    api_urls = ["http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1/1000",
+                "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1001/2000",
+                "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/2001/3000"
                 ]
     try:
         seoulbike = pd.DataFrame()
@@ -61,5 +80,5 @@ def bikeMap(request):
     con.close()
     st_dict = bike_load.to_dict(orient='records')
 
-    return render(request, 'map.html', {'api_dict': st_dict})
+    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY})
 
