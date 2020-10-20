@@ -2,7 +2,7 @@
 <html lang="en">
 {% load static %}
 <head>
-    <title>따릉이 따고</title>
+    <title>따릉이 타고 삼천리</title>
 
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -116,7 +116,7 @@
                                         <div class="media">
                                             <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="Generic placeholder image">
                                             <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
+                                                <h5 class="notification-user">{{id}}</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                                 <span class="notification-time">30 minutes ago</span>
                                             </div>
@@ -147,7 +147,7 @@
                             <li class="user-profile header-notification">
                                 <a href="#!">
                                     <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image">
-                                    <span>John Doe</span>
+                                    <span>{{id}}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -191,7 +191,7 @@
                                 <div class="main-menu-header">
                                     <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
                                     <div class="user-details">
-                                        <span>John Doe</span>
+                                        <span>{{id}}</span>
                                         <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
                                     </div>
                                 </div>

@@ -2,8 +2,7 @@
 <html lang="en">
 {% load static %}
 <head>
-    <title>따릉이 따고</title>
-
+    <title>따릉이 타고 삼천리</title>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -96,7 +95,7 @@
                                         <div class="media">
                                             <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
                                             <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
+                                                <h5 class="notification-user">{{res_data.id}}</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                                 <span class="notification-time">30 minutes ago</span>
                                             </div>
@@ -127,7 +126,7 @@
                             <li class="user-profile header-notification">
                                 <a href="#!">
                                     <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image">
-                                    <span>John Doe</span>
+                                    <span>{{res_data.id}}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -173,7 +172,7 @@
                                 <div class="main-menu-header">
                                     <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
                                     <div class="user-details">
-                                        <span>John Doe</span>
+                                        <span>{{res_data.id}}</span>
                                         <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
                                     </div>
                                 </div>
@@ -435,63 +434,160 @@
                                 </div>
                                 <!-- Page-header end -->
 
-                                <!-- Page body start -->
-                                <div class="page-header card">
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-lg-12 col-xl-6">-->
-                                            <!-- Basic map start -->
-<!--                                            <div class="card">-->
-                                                <div class="card-header">
-                                                    <h5>대여정보</h5>
-                                                    <span>실시간 따릉이 정보</span>
-                                                    <div class="card-header-right">                                                             <i class="icofont icofont-spinner-alt-5"></i>                                                         </div>
-                                                </div>
-                                                <div class="card-block">
-                                                      	<div id="map" style="width:80%;height:500px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b06a82b0f56b0a67f916b342c5feb34f"></script>
-    <script>
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Bootstrap tab card start -->
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <!-- Row start -->
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-xl-6">
+                                                                <div class="sub-title">Default</div>
+                                                                <!-- Nav tabs -->
+                                                                <ul class="nav nav-tabs  tabs" role="tablist">
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- Tab panes -->
+                                                                <div class="tab-content tabs card-block">
+                                                                    <div class="tab-pane active" id="home1" role="tabpanel">
+                                                                        <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="road1" role="tabpanel">
+                                                                        <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="messages1" role="tabpanel">
+                                                                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-xl-6">
+                                                                <div id="map" style="width:100%;height:500px;"></div>
+                                                            </div>
+                                                        <!-- Row end -->
+<script type="text/javascript" src={{kakao_key}}></script>
+<script>
 
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
     level : 4 // 지도의 확대 레벨
 });
 
-// 마커를 표시할 위치와 title 객체 배열입니다
-var positions = [
-    {% for value in api_dict %}
+<!--// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다-->
+<!--var zoomControl = new kakao.maps.ZoomControl();-->
+<!--map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);-->
+
+<!--// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다-->
+<!--kakao.maps.event.addListener(map, 'zoom_changed', function() {-->
+
+<!--    // 지도의 현재 레벨을 얻어옵니다-->
+<!--    var level = map.getLevel();-->
+
+<!--    var message = '현재 지도 레벨은 ' + level + ' 입니다';-->
+<!--    var resultDiv = document.getElementById('result');-->
+<!--    resultDiv.innerHTML = message;-->
+
+<!--});-->
+
+var positions =[];
+{% for value in api_dict %}
+var num = {{ value.parkingBikeTotCnt }};
+if (num == 0){
+var positionsRed = [
     {
-        content:'<div style="padding:0 5px;background:#fff;width:20px;height:20px;border-radius:50%;background-color:red;text-align:right;display:table-cell;vertical-align:middle;">{{ value.parkingBikeTotCnt }}</div>',
-        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }})
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
-    {% endfor %}
 ];
+positions = positions.concat(positionsRed)
+}else if (num <= 2){
+var positionsYellow = [
+    {
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsYellow)
+}else{
+var positionsBlue = [
+    {
+        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsBlue)
+}
+{% endfor %}
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+
+        var locPosition = new kakao.maps.LatLng(lat, lon)
+
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition);
+
+      });
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
+
+    displayMarker(locPosition);
+}
 
 for (var i = 0; i < positions.length; i ++) {
-        var customOverlay = new kakao.maps.CustomOverlay({
+        var customOverlay1 = new kakao.maps.CustomOverlay({
                     content: positions[i].content,
                     position: positions[i].latlng,
                     map: map
         });
+        var customOverlay2 = new kakao.maps.CustomOverlay({
+            content: positions[i].title,
+            position: positions[i].latlng,
+            yAnchor: 1.8,
+            map: map
+
+        });
 }
-customOverlay.setMap(map);
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);
+}
 
 </script>
-                                                    <!--    // 마커를 생성합니다-->
-<!--    var customOverlays = new kakao.maps.CustomOverlay({-->
-<!--        map: map, // 마커를 표시할 지도-->
-<!--        position: positions[i].latlng, // 마커를 표시할 위치-->
-<!--        content : positions[i].content,-->
-<!--        clickable: true,-->
-<!--        xAnchor: 0.5,-->
-<!--        yAnchor: 1,-->
-<!--        zIndex: 3-->
-<!--    });-->
+                                                                                                                </div>
+                                                </div>
+                                                <!-- Bootstrap tab card end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-
-
-
-<!--                                                </div>-->
-<!--                                            </div>-->
                                             <!-- Basic map end -->
 <!--                                        </div>-->
 <!--                                        <div class="col-lg-12 col-xl-6">-->
@@ -508,7 +604,7 @@ customOverlay.setMap(map);
 <!--                                            </div>-->
 <!--                                            &lt;!&ndash; Markers map end &ndash;&gt;-->
 <!--                                        </div>-->
-                                    </div>
+<!--                                    </div>-->
 <!--                                    <div class="row">-->
 <!--                                        <div class="col-lg-12 col-xl-6">-->
 <!--                                            &lt;!&ndash; Overlay map start &ndash;&gt;-->
@@ -538,7 +634,7 @@ customOverlay.setMap(map);
 <!--                                            </div>-->
 <!--                                            &lt;!&ndash; Street View map end &ndash;&gt;-->
 <!--                                        </div>-->
-                                 </div>
+<!--                                 </div>-->
                             </div>
                             <!-- Page body end -->
                         </div>
@@ -550,12 +646,6 @@ customOverlay.setMap(map);
             </div>
         </div>
     </div>
-</div>
-
-<div class="fixed-button">
-	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
-	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-	</a>
 </div>
 
 

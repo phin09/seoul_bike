@@ -1,5 +1,9 @@
 from django.contrib import admin
 from bikeapp.models import station
-# Register your models here.
 
-admin.site.register(station)
+
+class stationAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(station, stationAdmin)
