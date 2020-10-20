@@ -5,16 +5,31 @@ import os, json
 from seoulbike.settings import BASE_DIR
 from django.core.exceptions import ImproperlyConfigured
 import requests
-from time import ctime
 import time
 import sqlite3
+from account.models import bikeUser
 
 
 def index(request):
-    return render(request, 'index.html')
+    # 로그인 session
+    user_pk = request.session.get('user')
+    res_data = {}
+    if user_pk:
+        bikeuser = bikeUser.objects.get(pk=user_pk)
+        res_data["id"] = bikeuser
+    return render(request, 'index.html', res_data)
 
 
 def bikeMap(request):
+    # 로그인 session
+    user_pk = request.session.get('user')
+    res_data = {}
+    if user_pk:
+        bikeuser = bikeUser.objects.get(pk=user_pk)
+        res_data["id"] = bikeuser
+
+
+    # bike data 불러오기
     secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
     with open(secret_file) as f:

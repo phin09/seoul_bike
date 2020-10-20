@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bikeapp.apps.BikeappConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
