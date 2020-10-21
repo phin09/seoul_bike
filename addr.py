@@ -1,19 +1,15 @@
-# -*- coding:utf-8 -*-
-import pandas as pd
-import json
-import requests
-import time
-import sqlite3
-import sys
-import io
+iiVG1
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+>>>>>>> 8e55445e993a3f284960d26f3fe6aa099077bbeb
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8') #한글출력
 
 
 ## 실시간 대여소 정보 api 데이터 불러오기
-api_urls = ["http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/1/1000",
-            "http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/1001/2000",
-            "http://openapi.seoul.go.kr:8088/736c62634a736b7339376a694c6665/json/bikeList/2001/3000"
+SEOUL_KEY = get_secret("SEOUL_KEY")
+api_urls = ["http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1/1000",
+            "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1001/2000",
+            "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/2001/3000"
             ]
 ## json dataframe 전환 및 date 칼럼 추가
 try:
@@ -128,3 +124,4 @@ station_info_save = station_info[['stationId', 'id', 'stationName', 'rackTotCnt'
 print(station_info)
 station_info_save.to_csv("station_info.csv", encoding="utf-8")
 # station_info_save.to_csv("station_info1.csv", encoding="cp949")
+
