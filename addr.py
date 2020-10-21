@@ -6,8 +6,8 @@ import time
 import sqlite3
 import sys
 import io
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8') #한글출력
 
 
 ## 실시간 대여소 정보 api 데이터 불러오기
