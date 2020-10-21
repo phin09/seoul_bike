@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.urls import path, include
 import pandas as pd
-import os, json
+import os
+import json
 from seoulbike.settings import BASE_DIR
 from django.core.exceptions import ImproperlyConfigured
 import requests
@@ -18,7 +18,6 @@ def index(request):
         bikeuser = bikeUser.objects.get(pk=user_pk)
         res_data["id"] = bikeuser
     return render(request, 'index.html', res_data)
-
 
 def bikeMap(request):
     # 로그인 session
@@ -95,5 +94,5 @@ def bikeMap(request):
     con.close()
     st_dict = bike_load.to_dict(orient='records')
 
-    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY})
+    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'res_data': res_data})
 
