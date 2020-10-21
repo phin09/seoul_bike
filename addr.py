@@ -1,4 +1,15 @@
-iiVG1
+# -*- coding:utf-8 -*-
+import pandas as pd
+import json
+import requests
+import time
+import sqlite3
+import sys
+import io
+<<<<<<< HEAD
+=======
+from seoulbike.settings import get_secret
+
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
 >>>>>>> 8e55445e993a3f284960d26f3fe6aa099077bbeb
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
@@ -124,4 +135,3 @@ station_info_save = station_info[['stationId', 'id', 'stationName', 'rackTotCnt'
 print(station_info)
 station_info_save.to_csv("station_info.csv", encoding="utf-8")
 # station_info_save.to_csv("station_info1.csv", encoding="cp949")
-
