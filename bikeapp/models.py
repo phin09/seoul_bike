@@ -12,7 +12,7 @@ class station(models.Model):
     shared = models.IntegerField()
     stationLatitude = models.FloatField()
     stationLongitude = models.FloatField()
-    stationId = models.IntegerField(primary_key=True)
+    stationId = models.CharField(max_length=100, primary_key=True)
     date = models.DateTimeField(null=True)
 
     #rackTotCnt  거치대 수
