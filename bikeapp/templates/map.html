@@ -170,7 +170,7 @@ var num = {{ value.parkingBikeTotCnt }};
 if (num == 0){
 var positionsRed = [
     {
-        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -179,7 +179,7 @@ positions = positions.concat(positionsRed)
 }else if (num <= 2){
 var positionsYellow = [
     {
-        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -188,7 +188,7 @@ positions = positions.concat(positionsYellow)
 }else{
 var positionsBlue = [
     {
-        content:'<div style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</div>',
+        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -245,7 +245,17 @@ function displayMarker(locPosition, message) {
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);
 }
+
+
       });
+
+    // button click event
+function clickStationMarker() {
+    var message = "바뀐 내용";
+    document.getElementById('homeinfobox').innerHTML = message;
+    //return false;
+}
+
     </script>
   </head>
   <body>
@@ -302,42 +312,47 @@ function displayMarker(locPosition, message) {
           <div class="panel-group sidebar-body" id="accordion-left">
             <div class="panel panel-default">
               <!-- <div class="panel-heading"> -->
-<!--                <h4 class="panel-title">-->
+                <h4 class="panel-title">Home</h4>
                     <!-- <i class="fa fa-list-alt"> -->
-                    <ul class="nav nav-tabs tabs" role="tablist">
-                      <li class="nav-item">
-                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>
-                      </li>
-                    </ul>
-<!--                </h4>-->
+<!--                    <ul class="nav nav-tabs tabs" role="tablist">-->
+<!--                      <li class="nav-item">-->
+<!--                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>-->
+<!--                      </li>-->
+<!--                      <li class="nav-item">-->
+<!--                          <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>-->
+<!--                      </li>-->
+<!--                      <li class="nav-item">-->
+<!--                          <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>-->
+<!--                      </li>-->
+<!--                    </ul>-->
               <div id="layers" class="panel-collapse collapse in">
                 <div class="panel-body list-group">
-                  <div class="tab-content tabs card-block">
-                    <div class="tab-pane active" id="home1" role="tabpanel">
-                        <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                    <div>
+                        <p id="homeinfobox" class="m-0">내용</p>
                         <span class="pull-right slide-submenu">
-                          <i class="fa fa-chevron-left"></i>
+                            <i class="fa fa-chevron-left"></i>
                         </span>
                     </div>
-                    <div class="tab-pane" id="road1" role="tabpanel">
-                        <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
-                        <span class="pull-right slide-submenu">
-                          <i class="fa fa-chevron-left"></i>
-                        </span>
-                    </div>
-                    <div class="tab-pane" id="messages1" role="tabpanel">
-                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
-                        <span class="pull-right slide-submenu">
-                          <i class="fa fa-chevron-left"></i>
-                        </span>
-                    </div>
-              </div>
+<!--                  <div class="tab-content tabs card-block">-->
+<!--                    <div class="tab-pane active" id="home1" role="tabpanel">-->
+<!--                        <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>-->
+<!--                        <span class="pull-right slide-submenu">-->
+<!--                          <i class="fa fa-chevron-left"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    <div class="tab-pane" id="road1" role="tabpanel">-->
+<!--                        <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>-->
+<!--                        <span class="pull-right slide-submenu">-->
+<!--                          <i class="fa fa-chevron-left"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    <div class="tab-pane" id="messages1" role="tabpanel">-->
+<!--                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>-->
+<!--                        <span class="pull-right slide-submenu">-->
+<!--                          <i class="fa fa-chevron-left"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--              </div>-->
             </div>
           </div>
          </div>
