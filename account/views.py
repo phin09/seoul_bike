@@ -64,8 +64,9 @@ def login(request):
 
             #위 정보들로 인스턴스 생성
                 if check_password(password, bikeuser.password):
-                    request.session['user'] = bikeuser.id
-                    return redirect('index/')
+                    # request.session['user'] = bikeuser.id
+                    request.session['user'] = bikeuser.username
+                    return redirect('bikeMap/')
                 else:
                     res_data['error'] = "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다."
             except bikeUser.DoesNotExist:

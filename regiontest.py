@@ -36,3 +36,5 @@ while True:
 
 df_result = pd.DataFrame(result)
 df_result.to_csv( 'area.csv', index = False )
+
+print(df_result)

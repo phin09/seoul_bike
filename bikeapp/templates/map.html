@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>따릉이 타고 삼천리</title>
-    <link rel="stylesheet" href="../assets/css/ol.css" />
+    <link rel="stylesheet" href="{% static '/assets/css/ol.css' %}" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
     <style type="text/css">
@@ -63,7 +63,7 @@
       }
 
     </style>
-    <script type="text/javascript" src="../assets/js/ol.js"></script>
+    <script type="text/javascript" src="{% static '/assets/js/ol.js' %}"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src={{kakao_key}}></script>
@@ -140,7 +140,7 @@
           applyMargins();
         });
 
-<!--        $(window).on("resize", applyMargins);-->
+        $(window).on("resize", applyMargins);
 
 <!--         var map = new ol.Map({-->
 <!--           target: "map",-->
@@ -255,6 +255,36 @@ function clickStationMarker() {
     document.getElementById('homeinfobox').innerHTML = message;
     //return false;
 }
+function geocoderInfo() {
+    var loc = "주소"
+    document.getElementById('centerAddr').innerHTML = loc;
+    //return false;
+}
+
+<!--var geocoder = new kakao.maps.services.Geocoder();-->
+
+<!--// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다-->
+<!--searchAddrFromCoords(map.getCenter(), displayCenterInfo);-->
+
+<!--function searchAddrFromCoords(coords, callback) {-->
+<!--    // 좌표로 행정동 주소 정보를 요청합니다-->
+<!--    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);-->
+<!--}-->
+
+<!--// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다-->
+<!--function displayCenterInfo(result, status) {-->
+<!--    if (status === kakao.maps.services.Status.OK) {-->
+<!--        var infoDiv = document.getElementById('centerAddr');-->
+
+<!--        for(var i = 0; i < result.length; i++) {-->
+<!--            // 행정동의 region_type 값은 'H' 이므로-->
+<!--            if (result[i].region_type === 'H') {-->
+<!--                infoDiv.innerHTML = result[i].address_name;-->
+<!--                break;-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--}-->
 
     </script>
   </head>
@@ -311,35 +341,44 @@ function clickStationMarker() {
         <div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
           <div class="panel-group sidebar-body" id="accordion-left">
             <div class="panel panel-default">
-              <!-- <div class="panel-heading"> -->
-                <h4 class="panel-title">Home</h4>
-                    <!-- <i class="fa fa-list-alt"> -->
-<!--                    <ul class="nav nav-tabs tabs" role="tablist">-->
-<!--                      <li class="nav-item">-->
-<!--                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>-->
-<!--                      </li>-->
+<!--               <div class="panel-heading">-->
+<!--                <h4 class="panel-title">Home</h4>-->
+<!--                     <i class="fa fa-list-alt">-->
+                    <ul class="nav nav-tabs tabs" role="tablist">
+                      <li class="nav-item">
+                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>
+                      </li>
 <!--                      <li class="nav-item">-->
 <!--                          <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>-->
 <!--                      </li>-->
 <!--                      <li class="nav-item">-->
 <!--                          <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>-->
 <!--                      </li>-->
-<!--                    </ul>-->
+                    </ul>
+<!--               </div>-->
               <div id="layers" class="panel-collapse collapse in">
                 <div class="panel-body list-group">
-                    <div>
-                        <p id="homeinfobox" class="m-0">내용</p>
-                        <span class="pull-right slide-submenu">
-                            <i class="fa fa-chevron-left"></i>
-                        </span>
-                    </div>
-<!--                  <div class="tab-content tabs card-block">-->
-<!--                    <div class="tab-pane active" id="home1" role="tabpanel">-->
-<!--                        <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>-->
+<!--                    <div>-->
+<!--                        <p id="homeinfobox" class="m-0">내용</p>-->
 <!--                        <span class="pull-right slide-submenu">-->
-<!--                          <i class="fa fa-chevron-left"></i>-->
+<!--                            <i class="fa fa-chevron-left"></i>-->
 <!--                        </span>-->
 <!--                    </div>-->
+                  <div class="tab-content tabs card-block">
+                    <div class="tab-pane active" id="home1" role="tabpanel">
+                        <span id="centerAddr"></span>
+                        <p class="m-0"><h4>보유량 과다 대여소</h4></p>
+                        {% for value in st_max %}
+                        <p class="m-0">{{value.stationName}}</p>
+                        {% endfor %}
+                        <p class="m-0"><h4>보유량 부족 대여소</h4></p>
+                        {% for value in st_min %}
+                        <p class="m-0">{{value.stationName}}</p>
+                        {% endfor %}
+                        <span class="pull-right slide-submenu">
+                          <i class="fa fa-chevron-left"></i>
+                        </span>
+                    </div>
 <!--                    <div class="tab-pane" id="road1" role="tabpanel">-->
 <!--                        <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>-->
 <!--                        <span class="pull-right slide-submenu">-->
@@ -351,11 +390,12 @@ function clickStationMarker() {
 <!--                        <span class="pull-right slide-submenu">-->
 <!--                          <i class="fa fa-chevron-left"></i>-->
 <!--                        </span>-->
-<!--                    </div>-->
-<!--              </div>-->
+                    </div>
+              </div>
             </div>
           </div>
          </div>
+
         </div>
         <div class="col-sm-4 col-md-6 mid"></div>
         </div>
@@ -363,8 +403,8 @@ function clickStationMarker() {
       <div class="mini-submenu mini-submenu-left pull-left">
         <i class="fa fa-list-alt"></i>
       </div>
-      <div class="mini-submenu mini-submenu-right pull-right">
-        <i class="fa fa-tasks"></i>
-      </div>
+<!--      <div class="mini-submenu mini-submenu-right pull-right">-->
+<!--        <i class="fa fa-tasks"></i>-->
+<!--      </div>-->
   </body>
 </html>

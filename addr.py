@@ -6,15 +6,10 @@ import time
 import sqlite3
 import sys
 import io
-<<<<<<< HEAD
-=======
+
 from seoulbike.settings import get_secret
 
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
->>>>>>> 8e55445e993a3f284960d26f3fe6aa099077bbeb
-sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8') #한글출력
-
 
 ## 실시간 대여소 정보 api 데이터 불러오기
 SEOUL_KEY = get_secret("SEOUL_KEY")
