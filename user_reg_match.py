@@ -65,7 +65,7 @@ user_area = user_area.astype({'areaid': 'int', 'stationLatitude': 'float', 'stat
 from django.forms import model_to_dict
 from account.models import bikeUser
 station = [model_to_dict(station) for station in bikeUser.objects.all()]
-bikeuser = pd.DataFrame(station)
+bikeuser = pd.Data Frame(station)
 # 데이터프레임 타입 변경
 bikeuser = bikeuser.astype({'areaid': 'int'})
 

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko">
   <head>
+    {% load static %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +18,7 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-12 text-center">
+                <img src="{% static "C:\bikemap\Test\seoul_bike\bikeapp\static\assets\images\my-image.png" %}" alt="My image">
                 <h1>따릉이</h1>
             </div>
         </div>
@@ -26,7 +28,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-12">
-                <form method="POST" action=".">
+                <form method="POST" action="." enctype="multipart/form-data">
                  {% csrf_token %}
                   <div class="form-group">
                     <label for="username">아이디</label>
@@ -40,7 +42,6 @@
                  <div class="form-group">
                   <button style="position: absolute; left:10px" type="submit" name="btnform1" class="btn btn-primary">Login</button>
                   <form method="POST" action=".">
-                  <button style="position: absolute; right:10px" type="submit" name="btnform2" class="btn btn-primary">회원가입</button>
                  </form>
                 </div>
                 </form>
