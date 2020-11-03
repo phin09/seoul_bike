@@ -10,7 +10,7 @@ import sqlite3
 from account.models import bikeUser
 from django.forms import model_to_dict
 from bikeapp.models import station
-
+from django.http import HttpResponse
 
 # def index(request):
 #     # 로그인 session
@@ -61,67 +61,56 @@ def bikeMap(request):
             api_dict = api_json["rentBikeStatus"]["row"]
             api_dp = pd.DataFrame(api_dict)
             seoulbike = pd.concat([seoulbike, api_dp])
-
+    
         now = time.localtime()
         now_time = time.strftime("%Y/%m/%d %H:%M:%S", now)
         seoulbike = seoulbike.drop_duplicates("stationId", keep="last")
         seoulbike.insert(7, "date", now_time)
         seoulbike = seoulbike.reset_index()
         seoulbike = seoulbike.drop('index', axis=1)
-        # print(seoulbike.info())
-        # 테스트 나중에 db에서 데이터 불러와야함
-        stationUser = pd.read_csv("stationUser.csv", encoding="utf-8")
-        # print(stationUser)
+
+
+        #seoulbike = pd.read_csv("./station_info.csv", encoding="utf-8")
+        seoulbike['id'] = seoulbike['stationName'].str.split('.').str[0]
+        seoulbike = seoulbike.astype({'id': int})
+        station_area = pd.read_csv("./MergedStation_info.csv", encoding="utf-8")
+        station_area = station_area.drop(station_area.columns[[0, 2, 3]], axis=1)   # MergedStation_info.csv 사용했을 경우 - unnamed, 위경도 열 삭제
+        station_area = station_area.fillna(0)
+        station_area = station_area.astype({'cluster': int})
+        st_user = pd.merge(seoulbike, station_area, on="id", how="left")
+
+        con = sqlite3.connect('./db.sqlite3')
+        st_user.to_sql('station', con, if_exists='replace')
+        con.commit()
+
+
+        '''stationUser = pd.read_csv("stationUser.csv", encoding="utf-8")
         st_user = pd.merge(seoulbike, stationUser, on="stationId")
-        # print(st_user.info())
         st_user_result = st_user[st_user["areaid"] == int(user_area)]
-        print(st_user_result)
         st_dict = st_user_result.to_dict(orient='records')
-        print(type(st_dict))
-        max = st_user_result.iloc[[0,1,2,3,4]]
+        max = st_user_result.iloc[[0, 1, 2, 3, 4]]
         st_max = max.to_dict(orient='records')
-        min = st_user_result.iloc[[-1,-2,-3,-4,-5]]
-        st_min = min.to_dict(orient='records')
+        min = st_user_result.iloc[[-1, -2, -3, -4, -5]]
+        st_min = min.to_dict(orient='records')'''
 
-
-        # # print(st_user)
-        # # sqlite3 db 'station' table에 데이터 반영
-        # con = sqlite3.connect('./db.sqlite3')
-        # cur = con.cursor()
-        # # cur.execute("DELETE FROM station")
-        # # station table에 데이터 넣기
-        # seoulbike.to_sql('station', con, if_exists='replace')
-        # # if_exists = 'fail' : 같은 이름의 Table이 존재할 경우 ValueError 가 남
-        # # if_exists = 'replace': 같은 이름의 Table이 존재할 경우 기존 Table을 Drop하고 새로운 값을 Insert함
-        # # if_exists = 'append': 같은 이름의 Table이 존재할 경우 기존 Table에 추가로 새로운 값을 Insert함
-        # con.commit()
-        # con.close()
-
-        # sqlite3 db station table에 데이터 검색
-
-        # seoulbike.to_csv("test.csv", encoding="cp949")
 
 
     except Exception as e:
-    # except:
-        pass
-    #     api = "Error..."
-        # # seoul = [model_to_dict(station) for station in station.objects.all()]
-        # # seoulbike = pd.DataFrame(seoul)
-        # # print(seoulbike)
-        # seoulbike = pd.read_csv("station_info.csv", encoding="utf-8")
-        # stationUser = pd.read_csv("stationUser.csv", encoding="utf-8")
-        # # print(stationUser)
-        # st_user = pd.merge(seoulbike, stationUser, on="stationId")
-        # print(st_user.info())
-        # st_user_result = st_user[st_user["areaid"] == int(user_area)]
-        # # st_user_result.to_csv("st_user_result.csv", encoding="utf-8")
-        # print(st_user_result)
-        # st_dict = st_user_result.to_dict()
-        #
-        # print(st_dict.values())
-        # return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY})
+        print("Error...")
 
-    # return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'res_data': res_data})
-    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'st_min':st_min, 'st_max': st_max})
+    con = sqlite3.connect('./db.sqlite3')
+    cur = con.cursor()
+    query = cur.execute(("select * from station where cluster=" + user_area))
+    cols = [column[0] for column in query.description]
+    bike_load = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
+    con.close()
+    st_dict = bike_load.to_dict(orient='records')
+
+    plus = bike_load.iloc[[0, 1, 2, 3, 4]]
+    st_plus = plus.to_dict(orient='records')
+    minus = bike_load.iloc[[-1, -2, -3, -4, -5]]
+    st_minus = minus.to_dict(orient='records')
+    # return HttpResponse(st_dict)
+    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'st_minus': st_minus, 'st_plus': st_plus})
+
 

@@ -165,6 +165,10 @@
 
 
 var positions =[];
+var lat_temp_max = 0;
+var lat_temp_min = 999;
+var lng_temp_max = 0;
+var lng_temp_min = 999;
 {% for value in api_dict %}
 var num = {{ value.parkingBikeTotCnt }};
 if (num == 0){
@@ -195,7 +199,28 @@ var positionsBlue = [
 ];
 positions = positions.concat(positionsBlue)
 }
+
+// 지도 중앙좌표 만들기
+var lat_value = {{ value.stationLatitude }};
+if (lat_value > lat_temp_max) {
+  lat_temp_max = lat_value
+}else if (lat_value < lat_temp_min) {
+  lat_temp_min = lat_value
+}
+
+var lng_value = {{ value.stationLongitude }};
+if (lng_value > lng_temp_max) {
+  lng_temp_max = lng_value
+}else if (lng_value < lng_temp_min) {
+  lng_temp_min = lng_value
+}
 {% endfor %}
+
+// 권역 내 중심 좌표
+var center_lat = (lat_temp_max + lat_temp_min) / 2
+var center_lng = (lng_temp_max + lng_temp_min) / 2
+var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
+
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
 if (navigator.geolocation) {
 
@@ -208,7 +233,7 @@ if (navigator.geolocation) {
         var locPosition = new kakao.maps.LatLng(lat, lon)
 
         // 마커와 인포윈도우를 표시합니다
-        displayMarker(locPosition);
+        displayMarker(centerPosition);
 
       });
 
@@ -234,16 +259,16 @@ for (var i = 0; i < positions.length; i ++) {
         });
 }
 // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-function displayMarker(locPosition, message) {
+function displayMarker(position, message) {
 
     // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: locPosition
-    });
+<!--    var marker = new kakao.maps.Marker({-->
+<!--        map: map,-->
+<!--        position: position-->
+<!--    });-->
 
     // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);
+    map.setCenter(position);
 }
 
 
@@ -368,11 +393,11 @@ function geocoderInfo() {
                     <div class="tab-pane active" id="home1" role="tabpanel">
                         <span id="centerAddr"></span>
                         <p class="m-0"><h4>보유량 과다 대여소</h4></p>
-                        {% for value in st_max %}
+                        {% for value in st_plus %}
                         <p class="m-0">{{value.stationName}}</p>
                         {% endfor %}
                         <p class="m-0"><h4>보유량 부족 대여소</h4></p>
-                        {% for value in st_min %}
+                        {% for value in st_minus %}
                         <p class="m-0">{{value.stationName}}</p>
                         {% endfor %}
                         <span class="pull-right slide-submenu">
