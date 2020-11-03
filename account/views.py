@@ -56,7 +56,7 @@ def login(request):
         # 유효성 처리
         res_data = {}
         if not (username and password):
-            res_data['error'] = "아이디를 입력해주세요."
+            res_data['error'] = "아이디와 비밀번호를 입력해주세요."
         else:
             # 기존(DB)에 있는 bikeUser 모델과 같은 값인 걸 가져온다.
             try:

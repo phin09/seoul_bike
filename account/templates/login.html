@@ -10,6 +10,26 @@
 
     <title>로그인</title>
   </head>
+
+  <style>
+    div#login_wrapper {
+      /* border: 10px solid green; */
+      padding: 5px 20px;
+      margin-left: -250px;
+      margin-top: -170px;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      width: 500px;
+      height: 300px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
   <body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -24,7 +44,7 @@
             <div class="col-12 text-center">
             </div>
         </div>
-        <div class="row mt-5">
+        <div id="login_wrapper", class="row mt-5">
             <div class="col-12">
                 <form method="POST" action=".">
                  {% csrf_token %}
@@ -38,10 +58,10 @@
                   </div>
                     <label style="color:red; padding: 5px;">{{error}}</label>
                  <div class="form-group">
-                  <button style="position: absolute; left:10px" type="submit" name="btnform1" class="btn btn-primary">Login</button>
-                  <form method="POST" action=".">
-                  <button style="position: absolute; right:10px" type="submit" name="btnform2" class="btn btn-primary">회원가입</button>
-                 </form>
+                  <button style="position: absolute; right:10px; background-color: green; border-color: green;" type="submit" name="btnform1" class="btn btn-primary">Login</button>
+<!--                  <form method="POST" action=".">-->
+<!--                  <button style="position: absolute; right:10px" type="submit" name="btnform2" class="btn btn-primary">회원가입</button>-->
+<!--                 </form>-->
                 </div>
                 </form>
             </div>
