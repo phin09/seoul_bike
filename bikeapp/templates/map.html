@@ -176,7 +176,7 @@ var positionsRed = [
     {
         content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
-        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
 ];
 positions = positions.concat(positionsRed)
@@ -185,7 +185,7 @@ var positionsYellow = [
     {
         content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
-        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
 ];
 positions = positions.concat(positionsYellow)
@@ -194,7 +194,7 @@ var positionsBlue = [
     {
         content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
-        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
+        title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
 ];
 positions = positions.concat(positionsBlue)

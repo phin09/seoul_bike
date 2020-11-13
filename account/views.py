@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import bikeUser
 from django.contrib.auth.hashers import make_password, check_password
-# Create your views here.
 
 # 회원 가입
-def register(request):
+# 사용자 자체 가입을 막고 user_create.py로 102개 계정을 생성함
+'''def register(request):
     if request.method == "GET":
         return render(request, 'register.html')
     elif request.method == "POST" and 'btnform1' in request.POST:
@@ -42,7 +42,7 @@ def register(request):
                 return redirect('/')
         return render(request, 'register.html', res_data)
     elif request.method == "POST" and 'btnform2' in request.POST:
-        return redirect('/')
+        return redirect('/')'''
 
 # 로그인
 def login(request):
@@ -74,8 +74,8 @@ def login(request):
 
         return render(request, 'login.html', res_data)
 
-    elif request.method == "POST" and 'btnform2' in request.POST:
-        return redirect('user/register/')
+    '''elif request.method == "POST" and 'btnform2' in request.POST:
+        return redirect('user/register/')'''
 
 #로그아웃
 def logout(request):
