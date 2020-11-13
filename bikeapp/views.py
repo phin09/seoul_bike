@@ -45,6 +45,11 @@ def bikeMap(request):
 
     # 따릉이 api 호출
     SEOUL_KEY = get_secret("SEOUL_KEY")
+
+    # map.html로 넘길 kakao api key 불러오기
+    KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
+    KAKAO_SERVICES_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY") + "&libraries=services,clusterer,drawing"
+
     api_urls = ["http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1/1000",
                 "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1001/2000",
                 "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/2001/3000"
@@ -55,6 +60,7 @@ def bikeMap(request):
             api_result = requests.get(api_url)
             api_json = json.loads(api_result.content)
             api_dict = api_json["rentBikeStatus"]["row"]
+
             for item in api_dict:
                 stationCode = str(item['stationId'])
                 stationName = str(item['stationName'])
@@ -103,6 +109,35 @@ def bikeMap(request):
         # station_area = station_area.astype({'cluster': int})
         # st_user = pd.merge(seoulbike, station_area, on="id", how="left")
         #
+
+            ''' 재원씨 업데이트
+            api_dp = pd.DataFrame(api_dict)
+            seoulbike = pd.concat([seoulbike, api_dp])
+
+        now = time.localtime()
+        now_time = time.strftime("%Y/%m/%d %H:%M:%S", now)
+        seoulbike = seoulbike.drop_duplicates("stationId", keep="last")
+        seoulbike.insert(7, "date", now_time)
+        seoulbike = seoulbike.reset_index()
+        seoulbike = seoulbike.drop('index', axis=1)
+        # print(seoulbike.info())
+        # 테스트 나중에 db에서 데이터 불러와야함
+        stationUser = pd.read_csv("stationUser.csv", encoding="utf-8")
+        # print(stationUser)
+        st_user = pd.merge(seoulbike, stationUser, on="stationId")
+        # print(st_user.info())
+        st_user_result = st_user[st_user["areaid"] == int(user_area)]
+        # print(st_user_result)
+        st_dict = st_user_result.to_dict(orient='records')
+        # print(type(st_dict))
+        max = st_user_result.iloc[[0,1,2,3,4]]
+        st_max = max.to_dict(orient='records')
+        min = st_user_result.iloc[[-1,-2,-3,-4,-5]]
+        st_min = min.to_dict(orient='records')'''
+
+
+        # # print(st_user)
+        # # sqlite3 db 'station' table에 데이터 반영
         # con = sqlite3.connect('./db.sqlite3')
         # st_user.to_sql('station', con, if_exists='replace')
         # con.commit()
@@ -137,9 +172,14 @@ def bikeMap(request):
     st_minus = minus.to_dict(orient='records')'''
     # return HttpResponse(st_dict)
 
-    # map.html로 넘길 kakao api key 불러오기
-    KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
 
-    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY})
-#, 'st_minus': st_minus, 'st_plus': st_plus
+# return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'res_data': res_data})
+    return render(request, 'index.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'st_min':st_min, 'st_max': st_max, 'KAKAO_SERVICES_KEY':KAKAO_SERVICES_KEY})
+
+
+def stationSearch(request):
+     search_key = request.GET['search_key']
+     context = {'search_key': search_key}
+     return render(request, 'test.html', context)
+
 
