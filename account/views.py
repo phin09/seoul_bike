@@ -4,45 +4,45 @@ from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
 # 회원 가입
-def register(request):
-    if request.method == "GET":
-        return render(request, 'register.html')
-    elif request.method == "POST" and 'btnform1' in request.POST:
-        #회원가입 처리 코드
-        # username = request.POST['username']
-        # password = request.POST['password']
-        # re_password = request.POST['re_password']
-        # areaid = request.POST['areaid']
-
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        re_password = request.POST.get('re_password', None)
-        areaid = request.POST.get('areaid', None)
-
-        res_data = {}
-        try:
-            bikeUser.objects.get(username=username)
-            res_data['error'] = '중복된 아이디입니다.'
-
-        except bikeUser.DoesNotExist:
-            if not (username and password and re_password and areaid):
-                res_data['error'] = "모든 정보를 입력해 주세요."
-            elif password != re_password:
-                res_data['error'] = "비밀번호가 틀립니다. 다시 입력해주세요"
-            # 같으면 저장
-            else:
-                #위 정보들로 인스턴스 생성
-                bikeuser = bikeUser(
-                    username=username,
-                    password=make_password(password),
-                    areaid=areaid,
-                )
-                #저장
-                bikeuser.save()
-                return redirect('/')
-        return render(request, 'register.html', res_data)
-    elif request.method == "POST" and 'btnform2' in request.POST:
-        return redirect('/')
+# def register(request):
+#     if request.method == "GET":
+#         return render(request, 'register.html')
+#     elif request.method == "POST" and 'btnform1' in request.POST:
+#         #회원가입 처리 코드
+#         # username = request.POST['username']
+#         # password = request.POST['password']
+#         # re_password = request.POST['re_password']
+#         # areaid = request.POST['areaid']
+#
+#         username = request.POST.get('username', None)
+#         password = request.POST.get('password', None)
+#         re_password = request.POST.get('re_password', None)
+#         areaid = request.POST.get('areaid', None)
+#
+#         res_data = {}
+#         try:
+#             bikeUser.objects.get(username=username)
+#             res_data['error'] = '중복된 아이디입니다.'
+#
+#         except bikeUser.DoesNotExist:
+#             if not (username and password and re_password and areaid):
+#                 res_data['error'] = "모든 정보를 입력해 주세요."
+#             elif password != re_password:
+#                 res_data['error'] = "비밀번호가 틀립니다. 다시 입력해주세요"
+#             # 같으면 저장
+#             else:
+#                 #위 정보들로 인스턴스 생성
+#                 bikeuser = bikeUser(
+#                     username=username,
+#                     password=make_password(password),
+#                     areaid=areaid,
+#                 )
+#                 #저장
+#                 bikeuser.save()
+#                 return redirect('/')
+#         return render(request, 'register.html', res_data)
+#     elif request.method == "POST" and 'btnform2' in request.POST:
+#         return redirect('/')
 
 # 로그인
 def login(request):

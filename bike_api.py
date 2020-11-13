@@ -74,16 +74,16 @@ except Exception as e:
 #         station(rackTotCnt=rTC, stationName=sName, parkingBikeTotCnt=pB, shared=s, stationLatitude=l, stationLongitude=lo, stationId=sI, date=date).save()
 
 
-con = sqlite3.connect('./db.sqlite3')
-cur = con.cursor()
-cur.execute("DELETE FROM bikeUser")
-#station table에 데이터 넣기
-# seoulbike.to_sql('station', con, if_exists='replace')
-# if_exists = 'fail' : 같은 이름의 Table이 존재할 경우 ValueError 가 남
-# if_exists = 'replace': 같은 이름의 Table이 존재할 경우 기존 Table을 Drop하고 새로운 값을 Insert함
-# if_exists = 'append': 같은 이름의 Table이 존재할 경우 기존 Table에 추가로 새로운 값을 Insert함
-con.commit()
-con.close()
+# con = sqlite3.connect('./db.sqlite3')
+# cur = con.cursor()
+# cur.execute("DELETE FROM bikeUser")
+# #station table에 데이터 넣기
+# # seoulbike.to_sql('station', con, if_exists='replace')
+# # if_exists = 'fail' : 같은 이름의 Table이 존재할 경우 ValueError 가 남
+# # if_exists = 'replace': 같은 이름의 Table이 존재할 경우 기존 Table을 Drop하고 새로운 값을 Insert함
+# # if_exists = 'append': 같은 이름의 Table이 존재할 경우 기존 Table에 추가로 새로운 값을 Insert함
+# con.commit()
+# con.close()
 
 
 

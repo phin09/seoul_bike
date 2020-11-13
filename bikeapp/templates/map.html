@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+
   <head>
     {% load static %}
     <meta charset="utf-8" />
@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="{% static '/assets/css/ol.css' %}" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
     <style type="text/css">
       body { overflow: hidden; }
 
       .navbar-offset { margin-top: 50px; }
-      #map { position: absolute; top: 50px; bottom: 0; left: 0; right: 0; }
+<!--      #map { position: absolute; top: 50px; bottom: 0; left: 0; right: 0; }-->
       #map .ol-zoom { font-size: 1.2em; }
 
       .zoom-top-opened-sidebar { margin-top: 5px; }
@@ -66,7 +68,10 @@
     <script type="text/javascript" src="{% static '/assets/js/ol.js' %}"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src={{kakao_key}}></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"></script>
+
+<!--    <script type="text/javascript" src={{kakao_key}}></script>-->
+
     <script type="text/javascript">
 
       function applyMargins() {
@@ -163,14 +168,13 @@
     level : 4 // 지도의 확대 레벨
 });
 
-
 var positions =[];
 {% for value in api_dict %}
 var num = {{ value.parkingBikeTotCnt }};
 if (num == 0){
 var positionsRed = [
     {
-        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #f30606, #fdb3b3);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: #c70039;border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -179,7 +183,7 @@ positions = positions.concat(positionsRed)
 }else if (num <= 2){
 var positionsYellow = [
     {
-        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -188,7 +192,7 @@ positions = positions.concat(positionsYellow)
 }else{
 var positionsBlue = [
     {
-        content:'<button onclick="clickStationMarker();" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;">{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationId }}</div>'
     },
@@ -209,6 +213,25 @@ if (navigator.geolocation) {
 
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition);
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        var result = geocoder.coord2RegionCode(lon, lat,  displayCenterInfo);
+
+        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+        function displayCenterInfo(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var infoDiv = document.getElementById('centerAddr1');
+
+                for(var i = 0; i < result.length; i++) {
+                    // 행정동의 region_type 값은 'H' 이므로
+                    if (result[i].region_type === 'H') {
+                        infoDiv.innerHTML = result[i].address_name;
+                        break;
+                    }
+                }
+            }
+        }
 
       });
 
@@ -234,7 +257,7 @@ for (var i = 0; i < positions.length; i ++) {
         });
 }
 // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-function displayMarker(locPosition, message) {
+function displayMarker(locPosition) {
 
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
@@ -246,48 +269,26 @@ function displayMarker(locPosition, message) {
     map.setCenter(locPosition);
 }
 
-
       });
 
-    // button click event
-function clickStationMarker() {
-    var message = "바뀐 내용";
-    document.getElementById('homeinfobox').innerHTML = message;
-    //return false;
-}
-function geocoderInfo() {
-    var loc = "주소"
-    document.getElementById('centerAddr').innerHTML = loc;
-    //return false;
-}
 
-<!--var geocoder = new kakao.maps.services.Geocoder();-->
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-<!--// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다-->
-<!--searchAddrFromCoords(map.getCenter(), displayCenterInfo);-->
 
-<!--function searchAddrFromCoords(coords, callback) {-->
-<!--    // 좌표로 행정동 주소 정보를 요청합니다-->
-<!--    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);-->
-<!--}-->
+<script>
+$('#search_button').click(function(){
+    var search_key = $('#search_input').val()
+    $.ajax({
+        url:'search/',
+        data : { 'search_key':search_key},
+        success:function(data){
+            $('#data_table').html(data)
+        }
+    })
+})
+</script>
 
-<!--// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다-->
-<!--function displayCenterInfo(result, status) {-->
-<!--    if (status === kakao.maps.services.Status.OK) {-->
-<!--        var infoDiv = document.getElementById('centerAddr');-->
-
-<!--        for(var i = 0; i < result.length; i++) {-->
-<!--            // 행정동의 region_type 값은 'H' 이므로-->
-<!--            if (result[i].region_type === 'H') {-->
-<!--                infoDiv.innerHTML = result[i].address_name;-->
-<!--                break;-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--}-->
-
-    </script>
-  </head>
   <body>
     <div class="container">
       <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
@@ -302,7 +303,7 @@ function geocoderInfo() {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">따릉이 타고 삼천리</a>
+            <a class="navbar-brand" href="/bikeMap">따릉이 타고 삼천리</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling 상단 링크 부분-->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -324,9 +325,9 @@ function geocoderInfo() {
             </ul> -->
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input id="search_input" type="text" class="form-control" placeholder="대여소 검색">
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button id="search_button" type="submit" class="btn btn-default">검색</button>
             </form>
             </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -334,9 +335,10 @@ function geocoderInfo() {
         </div>
 <!--      </nav>-->
       <div class="navbar-offset">
-
+<!--        <div id="map" style="width:100%;height:100%;overflow:hidden;">></div>-->
+          <div id="map">></div>
       </div>
-                      <div id="map" style="width:100%"></div>
+
       <div class="row main-row">
         <div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
           <div class="panel-group sidebar-body" id="accordion-left">
@@ -346,10 +348,10 @@ function geocoderInfo() {
 <!--                     <i class="fa fa-list-alt">-->
                     <ul class="nav nav-tabs tabs" role="tablist">
                       <li class="nav-item">
-                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">기본</a>
+                          <a class="nav-link active" data-toggle="tab" href="#home1" role="tab" onclick="clickHome()">기본</a>
                       </li>
 <!--                      <li class="nav-item">-->
-<!--                          <a class="nav-link" data-toggle="tab" href="#road1" role="tab">길찾기</a>-->
+<!--                          <a class="nav-link" data-toggle="tab" href="#road1" role="tab">대여소 상세</a>-->
 <!--                      </li>-->
 <!--                      <li class="nav-item">-->
 <!--                          <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">메세지</a>-->
@@ -366,15 +368,68 @@ function geocoderInfo() {
 <!--                    </div>-->
                   <div class="tab-content tabs card-block">
                     <div class="tab-pane active" id="home1" role="tabpanel">
-                        <span id="centerAddr"></span>
-                        <p class="m-0"><h4>보유량 과다 대여소</h4></p>
-                        {% for value in st_max %}
-                        <p class="m-0">{{value.stationName}}</p>
-                        {% endfor %}
-                        <p class="m-0"><h4>보유량 부족 대여소</h4></p>
-                        {% for value in st_min %}
-                        <p class="m-0">{{value.stationName}}</p>
-                        {% endfor %}
+                        <div id="info1">
+                                <div class="hAddr1">
+                                    <span class="title">현재위치 : </span>
+                                    <span id="centerAddr1"></span>
+                                </div>
+                            <p class="m-0"><h4>보유량 과다 대여소</h4>
+                            {% for value in st_max %}
+                            <p class="m-0">{{value.stationName}}</p>
+                            {% endfor %}
+                            <p class="m-0"><h4>보유량 부족 대여소</h4>
+                            {% for value in st_min %}
+                            <p class="m-0">{{value.stationName}}</p>
+                            {% endfor %}
+                        </div>
+                        <div id="info2">
+
+<script>
+
+// button click event
+var infoDiv = document.getElementById('centerAddr');
+
+function clickStationMarker(clicked_id) {
+    {% for value in api_dict %}
+        var id = '{{ value.stationId }}';
+        if (id == clicked_id){
+                var stationId='{{ value.stationId }}';
+                var rackTotCnt='{{ value.rackTotCnt }}';
+                var stationName='{{ value.stationName }}';
+                var parkingBikeTotCnt='{{ value.parkingBikeTotCnt }}';
+                var shared='{{ value.shared }}';
+                var stationLatitude={{ value.stationLatitude }};
+                var Latitude= parseFloat(stationLatitude);
+                var stationLongitude={{ value.stationLongitude }};
+                var Longitude= parseFloat(stationLongitude);
+    }
+        {% endfor %}
+
+
+
+        document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationId+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
+        document.getElementById("info2").style.display ='block';
+        document.getElementById("info1").style.display ='none';
+        var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div
+        var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+        var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+        var stPosition = new kakao.maps.LatLng(parseFloat(stationLatitude), parseFloat(stationLongitude));
+<!--        var stPosition = new kakao.maps.LatLng(33.450701, 126.570667);-->
+
+
+        // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+        roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {
+            roadview.setPanoId(panoId,stPosition); //panoId와 중심좌표를 통해 로드뷰 실행
+        });
+            }
+
+function clickHome() {
+    document.getElementById("info1").style.display ='block';
+    document.getElementById("info2").style.display ='none';
+}
+</script>
+                        </div>
                         <span class="pull-right slide-submenu">
                           <i class="fa fa-chevron-left"></i>
                         </span>
@@ -399,12 +454,13 @@ function geocoderInfo() {
         </div>
         <div class="col-sm-4 col-md-6 mid"></div>
         </div>
-      </div>
+
       <div class="mini-submenu mini-submenu-left pull-left">
         <i class="fa fa-list-alt"></i>
       </div>
 <!--      <div class="mini-submenu mini-submenu-right pull-right">-->
 <!--        <i class="fa fa-tasks"></i>-->
 <!--      </div>-->
+
   </body>
 </html>

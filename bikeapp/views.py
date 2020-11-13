@@ -31,7 +31,7 @@ def bikeMap(request):
 
     # print(type(bikearea_user))
     user_area = bikearea_user.iloc[0, 2]
-    print(user_area)
+    # print(user_area)
     # bike data 불러오기
     secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
@@ -47,7 +47,9 @@ def bikeMap(request):
             raise ImproperlyConfigured(error_msg)
 
     SEOUL_KEY = get_secret("SEOUL_KEY")
+    # KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
     KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
+    KAKAO_SERVICES_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY") + "&libraries=services,clusterer,drawing"
 
     api_urls = ["http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1/1000",
                 "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1001/2000",
@@ -75,9 +77,9 @@ def bikeMap(request):
         st_user = pd.merge(seoulbike, stationUser, on="stationId")
         # print(st_user.info())
         st_user_result = st_user[st_user["areaid"] == int(user_area)]
-        print(st_user_result)
+        # print(st_user_result)
         st_dict = st_user_result.to_dict(orient='records')
-        print(type(st_dict))
+        # print(type(st_dict))
         max = st_user_result.iloc[[0,1,2,3,4]]
         st_max = max.to_dict(orient='records')
         min = st_user_result.iloc[[-1,-2,-3,-4,-5]]
@@ -123,5 +125,12 @@ def bikeMap(request):
         # return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY})
 
     # return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'res_data': res_data})
-    return render(request, 'map.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'st_min':st_min, 'st_max': st_max})
+    return render(request, 'index.html', {'api_dict': st_dict, 'kakao_key': KAKAO_KEY, 'st_min':st_min, 'st_max': st_max, 'KAKAO_SERVICES_KEY':KAKAO_SERVICES_KEY})
+
+
+def stationSearch(request):
+     search_key = request.GET['search_key']
+     context = {'search_key': search_key}
+     return render(request, 'test.html', context)
+
 

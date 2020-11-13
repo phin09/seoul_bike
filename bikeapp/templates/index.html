@@ -1,865 +1,838 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
 <head>
-    <title>따릉이 타고 삼천리</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Seoul Bike</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- CSS here -->
+        <link rel="shortcut icon" href="{% static '/assets/img/facvicon.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="{% static '/assets/css/bootstrap.min.css' %}"> 
+        <link rel="stylesheet" href="{% static '/assets/css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/slicknav.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/price_rangs.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/themify-icons.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/themify-icons.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/slick.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+        <!-- <link rel="stylesheet" href="assets/css/responsive.css"> -->
+        <style>
+    .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px; z-index: 1;}
+    .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+    /* .map_wrap {position:relative;width:100%;height:800px;padding-left: 0.5%;padding-right: 0.5%;padding-top: 1%;} */
+    .map_wrap {position:absolute;width:100%;height:98%;padding-left: 5px;padding-right:5px;padding-top: 15px; border-color: black;}
 
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    /* #menu_wrap {position:absolute;top:0;left:10px;bottom:0;width:500px;margin:30px 0 30px 10px;padding:10px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;} */
+    .bg_white {background:#fff;}
+    /* #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+    #menu_wrap .option{text-align: center;}
+    #menu_wrap .option p {margin:10px 0;}  
+    #menu_wrap .option button {margin-left:5px;} */
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="CodedThemes">
-      <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-      <meta name="author" content="CodedThemes">
-      <!-- Favicon icon -->
-      <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
-      <!-- Google font-->
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-      <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
-      <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
-      <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
-      <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
-  </head>
-  <body>
-    <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="ball-scale">
-            <div class='contain'>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-form
+ {
+  z-index: 2;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  /* opacity: 0.8; */
+  position: absolute;
+  height: 100%;
+  width: 50px;
+}
 
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
-                </div>
-                <div class="ring">
-                    <div class="frame"></div>
+.open-button {
+  /* z-index: 3; */
+  background-color: white;
+  color:  #555;
+  padding: 16px 9px;
+  border: none;
+  /* cursor: pointer; */
+  /* opacity: 0.8; */
+  position: absolute;
+
+  /* width: 30px; */
+  /* top: 25px;
+  left: 15px;
+  right: 15px;
+  width: 300px; */
+}
+.close-button {
+  /* z-index: 3; */
+  background-color: white;
+  color:  #555;
+  
+  border: none;
+  /* cursor: pointer; */
+  /* opacity: 0.8; */
+  position: relative;
+  top:8px;
+  left:380px;
+  display: none;
+
+  /* width: 30px; */
+  /* top: 25px;
+  left: 15px;
+  right: 15px;
+  width: 300px; */
+}
+
+.bar-img{
+    position: static ;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    vertical-align:top;
+}
+
+.bar-logo{
+    position: static ;
+    width: 30px;
+    height: 600px;
+    padding-top: 180px;
+    margin: 0;
+    vertical-align:top;
+    
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  overflow: auto;
+  padding-top: 10px;
+  display: none;
+  /* opacity: 0.8; */
+  position: absolute;
+  /* top: 85px; */
+  left: 50px;
+  /* right: 15px; */
+  border: none;
+  /* border: 3px solid #f1f1f1; */
+  z-index: 9;
+  background-color: white;
+  width: 420px;
+  height: 100%;
+}
+.popimg{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    margin: 0px 0px 0px 60px;
+    opacity: 0.8;
+    /* padding-top: 0;
+    padding-left: 60px;     */
+}
+
+.poploc{
+    position: fixed;
+    top: 3%;
+    /* padding-top:10px;
+    margin: 155px 0px 0px 65px; */
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    /* font-size: 1.5em; */
+    font-size: 18px;
+    color:#5E5B55;
+    font-weight: bold;
+    text-align: right;
+    z-index: 3;
+    left: 83%;
+    opacity: 0.5;
+    
+    
+}
+.poplocimg{
+    position:relative;
+    width: 25px;
+    height: 25px;
+    /* margin: 170px 0px 0px 30px; */
+    top:198px;
+}
+.popbottom{
+    top:820px;
+    left:10px;
+    position: absolute;
+    width: 400px;
+    height: auto;
+    z-index:20;
+    
+}
+
+.stinfo1-red{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 215px 0px 0px 40px;
+    background-color: #F17D69;
+    border-radius: 50%;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.stinfo1-red-text{
+    position: absolute;
+    float: left;
+    /* font-size: 1.5em; */
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    margin: 210px 0px 0px 85px;
+
+    color: #5E5B55;
+}
+
+.stinfo1-green{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 498px 0px 0px 40px;
+    background-color: #80C9C2;
+    border-radius: 50%;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+.stinfo1-green-text{
+    position: absolute;
+    float: left;
+    /* font-size: 1.5em; */
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    margin: 495px 0px 0px 85px;
+    color: #5E5B55;
+}
+
+#stinfo3{
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    font-family:"Roboto; sans-serif";
+    margin: 210px 0px 0px 40px;
+    color: #5E5B55;
+    display: block;
+    width:360px;
+    height: auto;
+    overflow: hidden;
+}
+
+#stinfo3-num{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Roboto; sans-serif";
+    margin: 10px 0px 0px 10px;
+    color: #5E5B55;
+    display: inline-block;
+    margin:0px 10px 0px 10px;
+}
+
+/* #stinfo3-road{
+    position: absolute;
+    margin-top : 285px;
+    border: none;
+    z-index: 15;
+    background-color: #F8F6F1;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 340px;
+    height: 260px;
+} */
+.stinfo3-rack-img{
+    top:320px;
+    left:20px;
+    position: relative;
+    display: block;
+}
+
+#stinfo3-rack{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:  "Roboto; sans-serif";
+    color: #5E5B55;
+    display: block;
+    top:295px;
+    left:60px;
+    width: 300px;
+}
+
+.stinfo3-bike-img{
+    top:320px;
+    left:20px;
+    position: relative;
+    display: block;
+}
+#stinfo3-bike{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:  "Roboto; sans-serif";
+    color: #5E5B55;
+    display: block;
+    top:295px;
+    left:60px;
+    width: 300px;
+}
+.search{
+    position: absolute;
+    border: none;
+    width: 300px;
+    height: 50px;
+    margin: 70px 0px 0px 100px;
+    z-index: 9;
+}
+
+.search-text {
+    position: absolute;
+    border: none;
+    background-color: white;
+    box-sizing: border-box;
+    opacity: 0.8;
+    padding: 10px 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color:#C8C8C8;
+    border-radius: 10px 8px 10px 8px;
+    width: 300px;
+
+    /* height: 50px; */
+    border: none;
+    /* margin: 45px 0px 0px 100px; */
+
+    /* background-image : url(assets/img/logo/logo.png); 
+    background-position:top right; 
+    background-repeat:no-repeat; */
+}
+.search-button{
+    position: absolute;
+    /* background-color: white; */
+    border: none;
+    margin: 5px 0 0 250px;
+    /* padding: 0 0 0 25px; */
+    width:35px;
+    height:35px;
+    z-index: 10;
+    background-color: transparent !important;
+}
+#buttonimg{
+    /* position: relative; */
+    width: 30px;
+    height: 30px;
+    /* background-color: transparent !important; */
+    margin: 0px;
+    /* padding: 0px 0px 0px 10px; */
+}
+
+.stinfo1 {
+  position: absolute;
+  margin-top : 255px;
+  margin-left : 20px;
+  border: none;
+  z-index: 15;
+  background-color: #F8F6F1;
+  width: 400px;
+  height: 235px;
+}
+
+.stinfo1-text{
+    position: absolute;
+    margin-top:15px;
+    margin-left:50px;
+    margin-right:10px;
+    width: 330px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+}
+/* .stinfo1-text{
+    position: absolute;
+    margin-top:30px;
+    margin-left:70px;
+    margin-right:10px;
+    width: 310px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+} */
+
+.stinfo1-text p{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    margin-top: 8px;
+    margin-left: 15px;
+    color: #818080;
+    width: 270px;
+    position: relative;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.stinfo1-img{
+    position: absolute;
+    width: 4px;
+    height:235px;
+    margin-left:33px;
+}
+
+.stinfo2 {
+  position: absolute;
+  margin-top : 540px;
+  margin-left : 20px;
+  border: none;
+  z-index: 15;
+  background-color: #F8F6F1;
+  width: 400px;
+  height: 235px;
+}
+.stinfo2-text{
+    position: absolute;
+    margin-top:15px;
+    margin-left:50px;
+    margin-right:10px;
+    width: 330px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+}
+
+.stinfo2-text p{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    margin-top: 8px;
+    margin-left: 15px;
+    color: #818080;
+    width: 270px;
+    position: relative;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.stinfo2-img{
+    position: absolute;
+    width: 4px;
+    height:235px;
+    margin-left:33px;
+}
+
+/* Add styles to the form container */
+.form-container {
+  /* max-width: 300px; */
+  padding: 10px;
+  border: none;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+  border: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  /* margin-bottom:10px; */
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.headerimg{
+    margin-top: 5px;
+}
+
+.show {display:block;}
+</style>
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static '/assets/img/logo/logo.png' %}" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <!-- Pre-loader end -->
-    <div id="pcoded" class="pcoded">
-        <div class="pcoded-overlay-box"></div>
-        <div class="pcoded-container navbar-wrapper">
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+       <!-- <div class="header-area header-transparrent">
+           <div class="headder-top header-sticky">
+            <a href="#"><img class="headerimg" src="./assets/img/logo_with_background.png" alt=""></a>
+                
+           </div>
+       </div> -->
+        <!-- Header End -->
+    </header>
+    <script>
+        function openForm() {
+            // var con = document.getElementById("myForm");
+            // var logo = document.getElementById("barlogo");
+            
+            if (document.getElementById("myForm").style.display == "none"){
+                document.getElementById("myForm").style.display = "block";
+                document.getElementById("barlogo").style.dsiplay= "block";
+                
+            } else {
+                document.getElementById("myForm").style.display = "none",
+                document.getElementById("barlogo").style.dsiplay= "none";
+            }
+        }
+        function closeForm() {
+        document.getElementById("info2").style.display ='none';
+        document.getElementById("info1").style.display ='block';
+        document.getElementById("popexit").style.display ='none';
+        }
 
-            <nav class="navbar header-navbar pcoded-header">
-                <div class="navbar-wrapper">
+     </script>
+            <div class="map_wrap">
+                <div id="map" style="width:100%;height:100%;">
+                    <!-- <button class="open-button" onclick="openForm()">
+                        <span><img class="bar-img" src="./assets/img/barimage.png" alt=""></span>
+                    </button> -->
+                        <div class="poploc" id="centerAddr1"></div>
 
-                    <div class="navbar-logo">
-                        <a class="mobile-menu" id="mobile-collapse" href="#!">
-                            <i class="ti-menu"></i>
-                        </a>
-                        <a class="mobile-search morphsearch-search" href="#">
-                            <i class="ti-search"></i>
-                        </a>
-                        <a href="{% url 'index' %}">
-                            <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="Theme-Logo" />
-                        </a>
-                        <a class="mobile-options">
-                            <i class="ti-more"></i>
-                        </a>
-                    </div>
-
-                    <div class="navbar-container container-fluid">
-                        <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
-
-                            <li>
-                                <a href="#" onclick="javascript:toggleFullScreen()">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-pink"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">{{id}}</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-3.jpg' %}" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="user-profile header-notification">
-                                <a href="#!">
-                                    <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image">
-                                    <span>{{id}}</span>
-                                    <i class="ti-angle-down"></i>
-                                </a>
-                                <ul class="show-notification profile-notification">
-                                    <li>
-                                        <a href="#!">
-                                            <i class="ti-settings"></i> Settings
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-user"></i> Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-email"></i> My Messages
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-lock"></i> Lock Screen
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-normal-sign-in.html">
-                                            <i class="ti-layout-sidebar-left"></i> Logout
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div class="pcoded-main-container">
-                <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
-                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                        <div class="pcoded-inner-navbar main-menu">
-                            <div class="">
-                                <div class="main-menu-header">
-                                    <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
-                                    <div class="user-details">
-                                        <span>{{id}}</span>
-                                        <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="#"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="pcoded-search">
-                                <span class="searchbar-toggle">  </span>
-                                <div class="pcoded-search-box ">
-                                    <input type="text" placeholder="Search">
-                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
-                                </div>
-                            </div>
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
-                                    <a href="{% url 'index' %}">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-<!--                                  <li class="pcoded-hasmenu">-->
-<!--                                    <a href="javascript:void(0)">-->
-<!--                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>-->
-<!--                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Components</span>-->
-<!--                                        <span class="pcoded-mcaret"></span>-->
-<!--                                    </a>-->
-<!--                                    <ul class="pcoded-submenu">-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="accordion.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="breadcrumb.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="button.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="tabs.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="color.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="label-badge.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Label Badge</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="tooltip.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="typography.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Typography</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="notification.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class=" ">-->
-<!--                                            <a href="icon-themify.html">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Icon</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-
-<!--                                    </ul>-->
-<!--                                </li>-->
-<!--<                                </ul>-->
-<!--                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Forms &amp; Tables</div>-->
-<!--                            <ul class="pcoded-item pcoded-left-item">-->
-<!--                                <li>-->
-<!--                                    <a href="form-elements-component.html">-->
-<!--                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>-->
-<!--                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Form Components</span>-->
-<!--                                        <span class="pcoded-mcaret"></span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a href="bs-basic-table.html">-->
-<!--                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>-->
-<!--                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>-->
-<!--                                        <span class="pcoded-mcaret"></span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-
-                            </ul>
-
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Chart &amp; Maps</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li>
-                                    <a href="chart.html">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'bikeMap' %}">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="auth-normal-sign-in.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="auth-sign-up.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="sample-page.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-
-<!--                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Other</div>-->
-<!--                            <ul class="pcoded-item pcoded-left-item">-->
-<!--                                <li class="pcoded-hasmenu ">-->
-<!--                                    <a href="javascript:void(0)">-->
-<!--                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>-->
-<!--                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>-->
-<!--                                        <span class="pcoded-mcaret"></span>-->
-<!--                                    </a>-->
-<!--                                    <ul class="pcoded-submenu">-->
-<!--                                        <li class="">-->
-<!--                                            <a href="javascript:void(0)">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                        <li class="pcoded-hasmenu ">-->
-<!--                                            <a href="javascript:void(0)">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                            <ul class="pcoded-submenu">-->
-<!--                                                <li class="">-->
-<!--                                                    <a href="javascript:void(0)">-->
-<!--                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>-->
-<!--                                                        <span class="pcoded-mcaret"></span>-->
-<!--                                                    </a>-->
-<!--                                                </li>-->
-<!--                                            </ul>-->
-<!--                                        </li>-->
-<!--                                        <li class="">-->
-<!--                                            <a href="javascript:void(0)">-->
-<!--                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>-->
-<!--                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>-->
-<!--                                                <span class="pcoded-mcaret"></span>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-
-<!--                                    </ul>-->
-<!--                                </li>-->
-<!--                            </ul>-->
+                    
+                    <div class="open-form" >
+                        <button class="open-button" onclick="openForm()">
+                            <img class="bar-img" src="{% static '/assets/img/hamburger_icon.png' %}" alt="">
+                        </button>
+                        <div id="barlogo"style="display: none;">
+                            <img class="bar-logo" id="bar-logo" src="{% static '/assets/img/barlogo.png' %}" alt="">
                         </div>
-                    </nav>
-                    <div class="pcoded-content">
-                        <div class="pcoded-inner-content">
-                            <div class="main-body">
-                                <div class="page-wrapper">
-
-                                    <div class="page-body">
-                                        <div class="row">
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
-                                                        <span class="text-c-blue f-w-600">Use space</span>
-                                                        <h4>49/50GB</h4>
-                                                        <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Get more space
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                        <div class="chat-popup" id="myForm" style="display: block;">
+                                <img class="popimg" src="{% static '/assets/img/logo1.png' %}">
+                                <img class="popbottom" src="{% static '/assets/img/bike_bottom.png' %}">
+                                <button class="close-button" id="popexit" onclick="closeForm()">
+                                    <img class="popexit"  src="{% static '/assets/img/back.png' %}">
+                                </button>
+                                    <!-- <div class="poploc" id="centerAddr1"></div> -->
+                                    <!-- <img class="poplocimg" src="{% static '/assets/img/location_sign.png' %}"> -->
+                                    <div id="info1">
+                                        <div class="stinfo1-red">
+                                            <!-- <img src="{% static '/assets/img/red_sign.png' %}"> -->
+                                        </div>
+                                        <div class="stinfo1-red-text">
+                                            보유량 부족 대여소
+                                        </div>
+                                        <div class="stinfo1">
+                                            <img class="stinfo1-img" src="{% static '/assets/img/red_line.png' %}">
+                                            <div class="stinfo1-text">
+                                                {% for value in st_min %}
+                                                <p>{{value.stationName}}</p>
+                                                {% endfor %}
                                             </div>
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
-                                                        <span class="text-c-pink f-w-600">Revenue</span>
-                                                        <h4>$23,589</h4>
-                                                        <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
-                                                        <span class="text-c-green f-w-600">Fixed issue</span>
-                                                        <h4>45</h4>
-                                                        <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-green f-16 icofont icofont-tag m-r-10"></i>Tracked via microsoft
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
-                                                        <span class="text-c-yellow f-w-600">Followers</span>
-                                                        <h4>+562</h4>
-                                                        <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- Statestics Start -->
-                                            <div class="col-md-12 col-xl-8">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>Statestics</h5>
-                                                        <div class="card-header-left ">
-                                                        </div>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="icofont icofont-simple-left "></i></li>
-                                                                <li><i class="icofont icofont-maximize full-card"></i></li>
-                                                                <li><i class="icofont icofont-minus minimize-card"></i></li>
-                                                                <li><i class="icofont icofont-refresh reload-card"></i></li>
-                                                                <li><i class="icofont icofont-error close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div id="statestics-chart" style="height:517px;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-md-12 col-xl-4">
-                                                    <div class="card fb-card">
-                                                        <div class="card-header">
-                                                            <i class="icofont icofont-social-facebook"></i>
-                                                            <div class="d-inline-block">
-                                                                <h5>facebook</h5>
-                                                                <span>blog page timeline</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-block text-center">
-                                                            <div class="row">
-                                                                <div class="col-6 b-r-default">
-                                                                    <h2>23</h2>
-                                                                    <p class="text-muted">Active</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <h2>23</h2>
-                                                                    <p class="text-muted">Comment</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card dribble-card">
-                                                        <div class="card-header">
-                                                            <i class="icofont icofont-social-dribbble"></i>
-                                                            <div class="d-inline-block">
-                                                                <h5>dribble</h5>
-                                                                <span>Product page analysis</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-block text-center">
-                                                            <div class="row">
-                                                                <div class="col-6 b-r-default">
-                                                                    <h2>23</h2>
-                                                                    <p class="text-muted">Live</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <h2>23</h2>
-                                                                    <p class="text-muted">Message</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card twitter-card">
-                                                        <div class="card-header">
-                                                            <i class="icofont icofont-social-twitter"></i>
-                                                            <div class="d-inline-block">
-                                                                <h5>twitter</h5>
-                                                                <span>current new timeline</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-block text-center">
-                                                            <div class="row">
-                                                                <div class="col-6 b-r-default">
-                                                                    <h2>25</h2>
-                                                                    <p class="text-muted">new tweet</p>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <h2>450+</h2>
-                                                                    <p class="text-muted">Follower</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <!-- Email Sent End -->
-                                            <!-- Data widget start -->
-                                            <div class="col-md-12 col-xl-6">
-                                                <div class="card project-task">
-                                                    <div class="card-header">
-                                                        <div class="card-header-left ">
-                                                            <h5>Time spent : project &amp; task</h5>
-                                                        </div>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="icofont icofont-simple-left "></i></li>
-                                                                <li><i class="icofont icofont-maximize full-card"></i></li>
-                                                                <li><i class="icofont icofont-minus minimize-card"></i></li>
-                                                                <li><i class="icofont icofont-refresh reload-card"></i></li>
-                                                                <li><i class="icofont icofont-error close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block p-b-10">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Project & Task</th>
-                                                                        <th>Time Spents</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="task-contain">
-                                                                                <h6 class="bg-c-blue d-inline-block text-center">U</h6>
-                                                                                <p class="d-inline-block m-l-20">UI Design</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
-                                                                            <div class="progress d-inline-block">
-                                                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="task-contain">
-                                                                                <h6 class="bg-c-pink d-inline-block text-center">R</h6>
-                                                                                <p class="d-inline-block m-l-20">Redesign Android App</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
-                                                                            <div class="progress d-inline-block">
-                                                                                <div class="progress-bar bg-c-pink" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:60%">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="task-contain">
-                                                                                <h6 class="bg-c-yellow d-inline-block text-center">L</h6>
-                                                                                <p class="d-inline-block m-l-20">Logo Design</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
-                                                                            <div class="progress d-inline-block">
-                                                                                <div class="progress-bar bg-c-yellow" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="task-contain">
-                                                                                <h6 class="bg-c-green d-inline-block text-center">A</h6>
-                                                                                <p class="d-inline-block m-l-20">Appestia landing Page</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
-                                                                            <div class="progress d-inline-block">
-                                                                                <div class="progress-bar bg-c-green" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="task-contain">
-                                                                                <h6 class="bg-c-blue d-inline-block text-center">L</h6>
-                                                                                <p class="d-inline-block m-l-20">Logo Design</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
-                                                                            <div class="progress d-inline-block">
-                                                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-xl-6">
-                                                <div class="card add-task-card">
-                                                    <div class="card-header">
-                                                        <div class="card-header-left">
-                                                            <h5>To do list</h5>
-                                                        </div>
-                                                        <div class="card-header-right">
-                                                            <button class="btn btn-card btn-primary">Add task </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="to-do-list">
-                                                            <div class="checkbox-fade fade-in-primary d-block">
-                                                                <label class="check-task d-block">
-                                                                    <input type="checkbox" value="">
-                                                                    <span class="cr">
-                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
-                                                                    </span>
-                                                                    <span><h6>Schedule Meeting with Compnes <span class="label bg-c-green m-l-10 f-10">2 week</span></h6></span>
-                                                                    <div class="task-card-img m-l-40">
-                                                                        <a href="#!"><img src="{% static 'assets/avatar-2.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
-                                                                        <a href="#!"><img src="{% static 'assets/avatar-3.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="to-do-list">
-                                                            <div class="checkbox-fade fade-in-primary d-block">
-                                                                <label class="check-task d-block">
-                                                                    <input type="checkbox" value="">
-                                                                    <span class="cr">
-                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
-                                                                    </span>
-                                                                    <span><h6>Meeting With HOD's and borad</h6><p class="text-muted m-l-40">23 january 2003</p></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="to-do-list">
-                                                            <div class="checkbox-fade fade-in-primary d-block">
-                                                                <label class="check-task d-block">
-                                                                    <input type="checkbox" value="">
-                                                                    <span class="cr">
-                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
-                                                                    </span>
-                                                                    <span><h6>Create template, admin with responsive<span class="label bg-c-pink m-l-10">2 week</span></h6></span>
-                                                                    <div class="task-card-img m-l-40">
-                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40"></a>
-                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-3.jpg' %}" data-toggle="tooltip" title="Suzen" alt="" class="img-40 m-l-10"></a>
-                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-4.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40 m-l-10"></a>
-                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="to-do-list">
-                                                            <div class="checkbox-fade fade-in-primary d-block">
-                                                                <label class="check-task d-block">
-                                                                    <input type="checkbox" value="">
-                                                                    <span class="cr">
-                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
-                                                                    </span>
-                                                                    <span><h6>Meeting With HOD's and borad</h6>
-                                                                        <p class="text-muted m-l-40">23 january 2003</p></span>
-                                                                        <div class="task-card-img m-l-40">
-                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
-                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-3.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
-                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Data widget End -->
-
+                                        </div>
+                                        <div class="stinfo1-green">
+                                            <!-- <img src="{% static '/assets/img/green_sign.png' %}"> -->
+                                        </div>
+                                        <div class="stinfo1-green-text">
+                                            보유량 과다 대여소
+                                        </div>
+                                        <div class="stinfo2">
+                                            <img class="stinfo1-img" src="{% static '/assets/img/green_line.png' %}">
+                                            <div class="stinfo2-text">
+                                                {% for value in st_max %}
+                                                <p>{{value.stationName}}</p>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="info2" style="display: none;">
+                                        <div id="stinfo3"></div>
+                                        <!-- <div id="stinfo3-num"></div> -->
+                                        <div id="stinfo3-load"></div>
+                                        <img class="stinfo3-rack-img" src="{% static '/assets/img/check_icon.png' %}">
+                                        <div id="stinfo3-rack"></div>
+                                        <img class="stinfo3-bike-img" src="{% static '/assets/img/check_icon.png' %}">
+                                        <div id="stinfo3-bike">
 
-                                    <div id="styleSelector">
-
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="fixed-button">
-                    <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
-                      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-                    </a>
+                    </div>       
+                    <!-- <div class="search">
+                        <input type="text" class="search-text" placeholder="대여소, ID 검색">
+                        <button type="button" class="search-button">
+                            <img id= "buttonimg" src="assets/img/search_logo.png" alt=""></img>
+                        </button>
+                    </div> -->
                 </div>
             </div>
-        </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript">
+var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
+level : 4 // 지도의 확대 레벨
+});
 
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-    <!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="{% static 'assets/images/browser/chrome.png' %}" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="{% static 'assets/images/browser/firefox.png' %}" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="{% static 'assets/images/browser/opera.png' %}" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="{% static 'assets/images/browser/safari.png' %}" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="{% static 'assets/images/browser/ie.png' %}" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
-<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
-<!-- modernizr js -->
-<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
-<!-- am chart -->
-<script src="{% static 'assets/pages/widget/amchart/amcharts.min.js' %}"></script>
-<script src="{% static 'assets/pages/widget/amchart/serial.min.js' %}"></script>
-<!-- Todo js -->
-<script type="text/javascript " src="{% static 'assets/pages/todo/todo.js' %} "></script>
-<!-- Custom js -->
-<script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/js/SmoothScroll.js' %}"></script>
-<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
-<script src="{% static 'assets/js/demo-12.js' %}"></script>
-<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-<script>
-var $window = $(window);
-var nav = $('.fixed-button');
-    $window.scroll(function(){
-        if ($window.scrollTop() >= 200) {
-         nav.addClass('active');
-     }
-     else {
-         nav.removeClass('active');
-     }
- });
+var positions =[];
+{% for value in api_dict %}
+var num = {{ value.parkingBikeTotCnt }};
+if (num == 0){
+var positionsRed = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsRed)
+}else if (num <= 2){
+var positionsYellow = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #FFDF8D, #FFDF8D), url(yellow_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsYellow)
+}else{
+var positionsBlue = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #80C9C2, #80C9C2), url(green_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationId }}</div>'
+    },
+];
+positions = positions.concat(positionsBlue)
+}
+{% endfor %}
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+
+        var locPosition = new kakao.maps.LatLng(lat, lon)
+
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition);
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        var result = geocoder.coord2RegionCode(lon, lat,  displayCenterInfo);
+
+        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+        function displayCenterInfo(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var infoDiv = document.getElementById('centerAddr1');
+
+                for(var i = 0; i < result.length; i++) {
+                    // 행정동의 region_type 값은 'H' 이므로
+                    if (result[i].region_type === 'H') {
+                        infoDiv.innerHTML = result[i].address_name;
+                        break;
+                    }
+                }
+            }
+        }
+
+      });
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
+
+    displayMarker(locPosition);
+}
+
+for (var i = 0; i < positions.length; i ++) {
+        var customOverlay1 = new kakao.maps.CustomOverlay({
+                    content: positions[i].content,
+                    position: positions[i].latlng,
+                    map: map
+        });
+        var customOverlay2 = new kakao.maps.CustomOverlay({
+            content: positions[i].title,
+            position: positions[i].latlng,
+            yAnchor: 1,
+            xAnchor: 0.2,
+            map: map
+
+        });
+}
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);
+
+
+      };
+
 </script>
-</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- 검색기능 -->
+<script>
+$('#search_button').click(function(){
+    var search_key = $('#search_input').val()
+    $.ajax({
+        url:'search/',
+        data : { 'search_key':search_key},
+        success:function(data){
+            $('#data_table').html(data)
+        }
+    })
+})
+</script>
+<script type="text/javascript">
+    // button click event
+    var infoDiv = document.getElementById('centerAddr1');
+    
+    function clickStationMarker(clicked_id) {
+        var con = document.getElementById("myForm");
+            if (con.style.display == "none"){
+                con.style.display = "block";
+            } 
+        {% for value in api_dict %}
+            var id = '{{ value.stationId }}';
+            if (id == clicked_id){
+                    var stationId='{{ value.stationId }}';
+                    var rackTotCnt='{{ value.rackTotCnt }}';
+                    var stationName='{{ value.stationName }}';
+                    var parkingBikeTotCnt='{{ value.parkingBikeTotCnt }}';
+                    var shared='{{ value.shared }}';
+                    var stationLatitude={{value.stationLatitude}};
 
-</html>
+                    var stationLongitude={{value.stationLongitude}};
+
+        }
+        {% endfor %}
+
+            // document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationId+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
+            // document.getElementById('info2').innerHTML = "<p style='position: absolute;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"<p style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationId+"</span><div id='roadview3' style='width:90%;height:240px;top:320px;left:3%;'><p>대여소 거치대 수 : "+rackTotCnt+"<p>대여소 자전거 수 : "+parkingBikeTotCnt;
+            // document.getElementById('info2').innerHTML = "<div class='stinfo3' style='position: relative;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"</div><div class='stinfo3-num' style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationId+"</div><div id='load' style='width: 340px;height: 260px'></div><div class='stinfo3-rack' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 280px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 거치대 수 : "+rackTotCnt+" 대 </div><div class='stinfo3-bike' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 10px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 자전거 수 : "+parkingBikeTotCnt+" 대 </div>";
+
+            document.getElementById('stinfo3').innerHTML = stationName+"<i id='stinfo3-num'>"+stationId;+"</i>";
+            // document.getElementById('stinfo3-num').innerText = stationId;
+            document.getElementById('stinfo3-load').innerHTML = "<div id='roadview3' style='width:90%;height:280px;top:290px;left:5%;'></div>";
+            document.getElementById('stinfo3-rack').innerText = '대여소 거치대 수 : '+rackTotCnt;
+            document.getElementById('stinfo3-bike').innerText = '대여소 자전거 수 : '+parkingBikeTotCnt;
+            document.getElementById("info2").style.display ='block';
+            document.getElementById("info1").style.display ='none';
+            document.getElementById("popexit").style.display ='block';
+            
+            var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div
+            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+            var stPosition = new kakao.maps.LatLng(parseFloat(stationLatitude), parseFloat(stationLongitude));
+            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+            roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {
+                roadview.setPanoId(panoId,stPosition); //panoId와 중심좌표를 통해 로드뷰 실행
+ 
+
+            });
+
+            // var con = document.getElementById("myForm");
+            // if (con.style.display = "none"){
+            //     con.style.display = "block";
+            // } 
+        }
+    
+    function clickHome() {
+        document.getElementById("info1").style.display ='block';
+        document.getElementById("info2").style.display ='none';
+    }
+
+
+    
+    </script>
+
+        <!-- </div> -->
+
+    <!-- </section> -->
+    <!-- ================ contact section end ================= -->
+    
+
+<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <!-- <script src="./assets/js/popper.min.js"></script> -->
+        <!-- <script src="./assets/js/bootstrap.min.js"></script> -->
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '/assets/js/jquery.slicknav.min.js' %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static '/assets/js/slick.min.js' %}"></script>
+        <script src="{% static '/assets/js/price_rangs.js' %}"></script>
+        
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '/assets/js/wow.min.js' %}"></script>
+		<script src="{% static '/assets/js/animated.headline.js' %}"></script>
+		
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '/assets/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static '/assets/js/jquery.sticky.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.magnific-popup.js' %}"></script>
+
+        <!-- contact js -->
+        <script src="{% static '/assets/js/contact.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.form.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static '/assets/js/mail-script.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static '/assets/js/plugins.js' %}"></script>
+        <script src="{% static '/assets/js/main.js' %}"></script>
+        
+    </body>
+    
+    </html>
