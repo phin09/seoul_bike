@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import bikeUser
+from .models import Users
 from django.contrib.auth.hashers import make_password, check_password
 
 # 회원 가입
@@ -21,10 +21,10 @@ from django.contrib.auth.hashers import make_password, check_password
 
         res_data = {}
         try:
-            bikeUser.objects.get(username=username)
+            Users.objects.get(username=username)
             res_data['error'] = '중복된 아이디입니다.'
 
-        except bikeUser.DoesNotExist:
+        except Users.DoesNotExist:
             if not (username and password and re_password and areaid):
                 res_data['error'] = "모든 정보를 입력해 주세요."
             elif password != re_password:
@@ -32,7 +32,7 @@ from django.contrib.auth.hashers import make_password, check_password
             # 같으면 저장
             else:
                 #위 정보들로 인스턴스 생성
-                bikeuser = bikeUser(
+                bikeuser = Users(
                     username=username,
                     password=make_password(password),
                     areaid=areaid,
@@ -58,9 +58,9 @@ def login(request):
         if not (username and password):
             res_data['error'] = "아이디와 비밀번호를 입력해주세요."
         else:
-            # 기존(DB)에 있는 bikeUser 모델과 같은 값인 걸 가져온다.
+            # 기존(DB)에 있는 Users 모델과 같은 값인 걸 가져온다.
             try:
-                bikeuser = bikeUser.objects.get(username=username)
+                bikeuser = Users.objects.get(username=username)
 
             #위 정보들로 인스턴스 생성
                 if check_password(password, bikeuser.password):
@@ -69,7 +69,7 @@ def login(request):
                     return redirect('bikeMap/')
                 else:
                     res_data['error'] = "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다."
-            except bikeUser.DoesNotExist:
+            except Users.DoesNotExist:
                 res_data['error'] = '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.'
 
         return render(request, 'login.html', res_data)

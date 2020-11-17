@@ -68,9 +68,7 @@
     <script type="text/javascript" src="{% static '/assets/js/ol.js' %}"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"></script>
-
-<!--    <script type="text/javascript" src={{kakao_key}}></script>-->
+    <script type="text/javascript" src="{{kakao_service_key}}"></script>
 
     <script type="text/javascript">
 
@@ -178,7 +176,7 @@ var num = {{ value.parkingBikeTotCnt }};
 if (num == 0){
 var positionsRed = [
     {
-        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: #c70039;border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: #c70039;border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323box-shadow: 0px 0px 20px #000;" id={{ value.stationCode }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
@@ -187,7 +185,7 @@ positions = positions.concat(positionsRed)
 }else if (num <= 2){
 var positionsYellow = [
     {
-        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #ffd812, #fff3b7);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #232323;text-shadow:1px 1px 0 #ffffff;box-shadow: 0px 0px 20px #000;" id={{ value.stationCode }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
@@ -196,7 +194,7 @@ positions = positions.concat(positionsYellow)
 }else{
 var positionsBlue = [
     {
-        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;" id={{ value.stationId }}>{{ value.parkingBikeTotCnt }}</button>',
+        content:'<button onclick="clickStationMarker(this.id);" style="width: 30px;height: 30px;background: linear-gradient(to right, #05d85c, #a7fdcb);border-radius: 50%;text-align: center;line-height: 30px;display: inline-block;margin-right: 10px;color: #ffffff;text-shadow:1px 1px 0 #232323,box-shadow: 0px 0px 20px #000;" id={{ value.stationCode }}>{{ value.parkingBikeTotCnt }}</button>',
         latlng: new kakao.maps.LatLng({{ value.stationLatitude }}, {{ value.stationLongitude }}),
         title: '<div style="font-size:1.1em;font-weight: bold;color:#232323;text-shadow:1px 1px 0 #ffffff;">{{ value.stationName }}</div>'
     },
@@ -220,7 +218,7 @@ if (lng_value > lng_temp_max) {
 }
 {% endfor %}
 
-// 권역 내 중심 좌표
+// 권역 내 중심 좌표 - 지도 중심 좌표를 이걸로 사용하는 방향으로 코드 수정하기
 var center_lat = (lat_temp_max + lat_temp_min) / 2
 var center_lng = (lng_temp_max + lng_temp_min) / 2
 var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
@@ -237,9 +235,6 @@ if (navigator.geolocation) {
         var locPosition = new kakao.maps.LatLng(lat, lon)
 
         // 마커와 인포윈도우를 표시합니다
-<<<<<<< HEAD
-        displayMarker(centerPosition);
-=======
         displayMarker(locPosition);
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new kakao.maps.services.Geocoder();
@@ -260,7 +255,6 @@ if (navigator.geolocation) {
                 }
             }
         }
->>>>>>> 7de2383aa0c6fbc8682206682ec718bb3d6c63fa
 
       });
 
@@ -286,11 +280,7 @@ for (var i = 0; i < positions.length; i ++) {
         });
 }
 // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-<<<<<<< HEAD
-function displayMarker(position, message) {
-=======
 function displayMarker(locPosition) {
->>>>>>> 7de2383aa0c6fbc8682206682ec718bb3d6c63fa
 
     // 마커를 생성합니다
 <!--    var marker = new kakao.maps.Marker({-->
@@ -402,32 +392,22 @@ $('#search_button').click(function(){
                   <div class="tab-content tabs card-block">
                     <div class="tab-pane active" id="home1" role="tabpanel">
 
-<!--                        내 임시 수정-->
-<!--                        <span id="centerAddr"></span>-->
-<!--                        <p class="m-0"><h4>보유량 과다 대여소</h4></p>-->
-<!--                        {% for value in st_plus %}-->
-<!--                        <p class="m-0">{{value.stationName}}</p>-->
-<!--                        {% endfor %}-->
-<!--                        <p class="m-0"><h4>보유량 부족 대여소</h4></p>-->
-<!--                        {% for value in st_minus %}-->
-<!--                        <p class="m-0">{{value.stationName}}</p>-->
-<!--                        {% endfor %}-->
-
                         <div id="info1">
                                 <div class="hAddr1">
                                     <span class="title">현재위치 : </span>
                                     <span id="centerAddr1"></span>
                                 </div>
                             <p class="m-0"><h4>보유량 과다 대여소</h4>
-                            {% for value in st_max %}
+                            {% for value in st_plus %}
                             <p class="m-0">{{value.stationName}}</p>
                             {% endfor %}
                             <p class="m-0"><h4>보유량 부족 대여소</h4>
-                            {% for value in st_min %}
+                            {% for value in st_minus %}
                             <p class="m-0">{{value.stationName}}</p>
                             {% endfor %}
                         </div>
-                        <div id="info2">
+
+                        <div id="info2">    <!--목적 모름-->
 
 <script>
 
@@ -436,9 +416,9 @@ var infoDiv = document.getElementById('centerAddr');
 
 function clickStationMarker(clicked_id) {
     {% for value in api_dict %}
-        var id = '{{ value.stationId }}';
+        var id = '{{ value.stationCode }}';
         if (id == clicked_id){
-                var stationId='{{ value.stationId }}';
+                var stationCode='{{ value.stationCode }}';
                 var rackTotCnt='{{ value.rackTotCnt }}';
                 var stationName='{{ value.stationName }}';
                 var parkingBikeTotCnt='{{ value.parkingBikeTotCnt }}';
@@ -452,7 +432,7 @@ function clickStationMarker(clicked_id) {
 
 
 
-        document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationId+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
+        document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationCode+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
         document.getElementById("info2").style.display ='block';
         document.getElementById("info1").style.display ='none';
         var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div

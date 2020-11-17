@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import bikeUser
+from .models import Users
 # Register your models here.
 
 class bikeUserAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(bikeUser, bikeUserAdmin)
+admin.site.register(Users, bikeUserAdmin)
