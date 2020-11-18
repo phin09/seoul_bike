@@ -1,6 +1,6 @@
 '''
-user 여러개 만들기
-db 생성 후 한 번만 돌릴 코드라 csv를 이용함
+table users에 초기값 넣기
+한 번만 돌릴 코드라 csv를 이용함
 '''
 
 import os

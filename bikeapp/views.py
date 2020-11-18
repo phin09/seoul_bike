@@ -1,18 +1,14 @@
-from django.shortcuts import render, get_object_or_404
-import pandas as pd
 import os
 import json
 from seoulbike.settings import BASE_DIR
 from django.core.exceptions import ImproperlyConfigured
-import requests
-import time
-import sqlite3
-from account.models import Users
-from bikeapp.models import StationNow, Area
+from django.shortcuts import render
 from django.forms import model_to_dict
 
-from django.http import HttpResponse
+from account.models import Users
+from bikeapp.models import StationNow, Area
 
+from django.http import HttpResponse
 
 def bikeMap(request):
     # 로그인 session
@@ -35,59 +31,31 @@ def bikeMap(request):
             error_msg = "Set the {} environment variable in secrets.json".format(setting)
             raise ImproperlyConfigured(error_msg)
 
-    # 따릉이 api 호출
-    SEOUL_KEY = get_secret("SEOUL_KEY")
-
     # map.html로 넘길 kakao api key 불러오기
-    #KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
-    KAKAO_SERVICES_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY") + "&libraries=services,clusterer,drawing"
+    # KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret("KAKAO_KEY")
+    KAKAO_SERVICES_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret(
+        "KAKAO_KEY") + "&libraries=services,clusterer,drawing"
 
-    api_urls = ["http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1/1000",
-                "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/1001/2000",
-                "http://openapi.seoul.go.kr:8088/"+SEOUL_KEY+"/json/bikeList/2001/3000"
-                ]
-    try:
-        for api_url in api_urls:
-            api_result = requests.get(api_url)
-            api_json = json.loads(api_result.content)
-            api_dict = api_json["rentBikeStatus"]["row"]
+    # st_dict는 parkingBikeTotCnt 등 지속적으로 업데이트 되는 값, fixed_dict는 위경도 등의 고정값
+    queryset_area = Area.objects.filter(areaId=user_area)
+    fixed_dict = [model_to_dict(query) for query in queryset_area]    # list of dicts
+    st_dict = []    # list of dicts
+    for item in fixed_dict:
+        query = StationNow.objects.filter(pk=item['stationCode'])
+        st_dict = st_dict + list(query.values('stationName', 'parkingBikeTotCnt', 'stationCode'))
 
-            for item in api_dict:
-                stationCode = str(item['stationId'])
-                stationName = str(item['stationName'])
-                id = int(stationName.split('.')[0])
-                parkingBikeTotCnt = int(item['parkingBikeTotCnt'])
-
-                try:    # update table station_now
-                    station_obj = StationNow.objects.get(pk=stationCode)
-                    station_obj.parkingBikeTotCnt = parkingBikeTotCnt
-                    station_obj.save()
-                except Exception as e:
-                    print(e)
-
-    except Exception as e:
-        print("Error...")
-
-    queryset = StationNow.objects.all()
-    user_stations_dict = [model_to_dict(query) for query in queryset]
-    stations_dp = pd.DataFrame(user_stations_dict)
-
-    queryset_area = Area.objects.all()
-    station_fixed_value_dict = [model_to_dict(query) for query in queryset_area]
-    fixed_dp = pd.DataFrame(station_fixed_value_dict)
-    temp_dp = pd.merge(stations_dp, fixed_dp, on="stationCode")
-    # 데이터 업데이트를 위해서 shared column 추가해야 됨
-    st_dict = temp_dp.to_dict(orient='records')
+    payload = [(f, s) for f, s in zip(fixed_dict, st_dict)]
+    
+    # 데이터 업데이트를 위해서 shared, 예측값 등 출력할 column 추가해야 됨
     # return HttpResponse(st_dict)
 
     # 임시
-    plus = temp_dp.iloc[[0, 1, 2, 3, 4]]
-    st_plus = plus.to_dict(orient='records')
-    minus = temp_dp.iloc[[-1, -2, -3, -4, -5]]
-    st_minus = minus.to_dict(orient='records')
-    #print(st_plus)
-    return render(request, 'index.html', {'api_dict': st_dict, 'kakao_service_key':KAKAO_SERVICES_KEY,
-                                          'st_plus':st_plus, 'st_minus':st_minus})
+    st_plus = st_dict[:5]
+    st_minus = st_dict[-5:]
+
+    return render(request, 'index.html', {'api_dict': payload,
+                                          'kakao_service_key': KAKAO_SERVICES_KEY,
+                                          'st_plus': st_plus, 'st_minus': st_minus})
 
 def stationSearch(request):
      search_key = request.GET['search_key']

@@ -1,6 +1,5 @@
 '''
 table area에 초기값 넣기
-db 생성 후 한 번만 돌릴 코드
 '''
 
 import os, json, requests

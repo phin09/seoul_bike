@@ -8,10 +8,11 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 # rackTotCnt  거치대 수
 # stationName 대여소명
+# id 또는 dataId 대여소 번호(stationName에서 추출)
+# stationCode   대여소ID(ST-XXX)
 # parkingBikeTotCnt 자전거주차총건수
 # stationLatitude 위도
 # stationLongitude    경도
-# stationCode   대여소ID(ST-XXX)
 
 
 class StationNow(models.Model):
@@ -37,7 +38,7 @@ class Area(models.Model):
     distance_school_high = models.IntegerField(default=0)
     distance_school_univ = models.IntegerField(default=0)
     PopTot = models.IntegerField(default=0)
-    # 2020_geoProperties.csv에서 긁어넣기 - 아직 안 함.
+    # geoProperties.csv에서 긁어넣기
     # 대여소 시/구/동 주소도 여기에 넣을지?
     class Meta:
         db_table = "area"  # custom table name
@@ -51,7 +52,7 @@ class DailyStation(models.Model):   # pk=id는 index임
         db_table = "daily_station"  # custom table name
 
 
-class Weather(models.Model):    # pk 고민, update_weather.py 수정 중
+class Weather(models.Model):    # 실시간 업데이트할 API 찾아야
     ta = models.FloatField()
     rn = models.FloatField()
     ws = models.FloatField()
@@ -64,6 +65,9 @@ class Weather(models.Model):    # pk 고민, update_weather.py 수정 중
     created_at = models.DateTimeField(default=timezone.localtime, editable=False)
     class Meta:
         db_table = "weather"  # custom table name
+
+
+# subwayProperties.csv, subwayTot.csv 각기 table 만들어 저장하기. 모델 업데이트용.
 
 
 # on_delete=models.PROTECT 참조값 사라져도 삭제하지 않음
