@@ -7,10 +7,10 @@ import os
 import django
 import pandas as pd
 from django.contrib.auth.hashers import make_password
-from account.models import Users
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seoulbike.settings")
 django.setup()
+from account.models import Users
 
 bikeuser = pd.read_csv("bikeuser1234.csv",encoding='cp949')
 
