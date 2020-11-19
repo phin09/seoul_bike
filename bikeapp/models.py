@@ -100,6 +100,7 @@ class Weather(models.Model):
     day = models.IntegerField(default=0)
     hour = models.IntegerField(default=0)
     T1H = models.FloatField()   # 기온
+    SKY = models.FloatField(default=0)
     RN1 = models.FloatField()   # 1시간 강수량
     REH = models.FloatField()   # 습도
     PTY = models.FloatField()   # 강수형태
