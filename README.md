@@ -6,7 +6,7 @@ django project for the Seoul public bicycle system
 Windows / Python 3.7 / Pycharm 2020.1 / pipenv / Django 3.1   
 &nbsp;  
 
-** 자동 실행 설정할 파일**   
+**자동 실행 설정할 파일**   
 10분마다: update_station_now_and_daily_station.py   
 1시간마다(매 50분): update_weather.py
 하루마다: table daily_station -> table station_to_stack 전처리. 모델 업데이트용 데이터 넣기
