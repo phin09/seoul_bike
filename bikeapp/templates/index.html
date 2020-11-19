@@ -285,50 +285,50 @@
     height: 260px;
 } */
 
-.stinfo3-predictedVal-img{
-    top:320px;
-    left:20px;
-    position: relative;
-    display: block;
-}
+      .stinfo3-predictedVal-img {
+        top: 320px;
+        left: 20px;
+        position: relative;
+        display: block;
+      }
 
-#stinfo3-predictedVal{
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    font-family:  "Roboto; sans-serif";
-    color: #5E5B55;
-    display: block;
-    top:295px;
-    left:60px;
-    width: 300px;
-}
+      #stinfo3-predictedVal {
+        position: relative;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Roboto; sans-serif";
+        color: #5e5b55;
+        display: block;
+        top: 295px;
+        left: 60px;
+        width: 300px;
+      }
 
-.stinfo3-bike-img{
-    top:320px;
-    left:20px;
-    position: relative;
-    display: block;
-}
-#stinfo3-bike{
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    font-family:  "Roboto; sans-serif";
-    color: #5E5B55;
-    display: block;
-    top:295px;
-    left:60px;
-    width: 300px;
-}
-.search{
-    position: absolute;
-    border: none;
-    width: 300px;
-    height: 50px;
-    margin: 70px 0px 0px 100px;
-    z-index: 9;
-}
+      .stinfo3-bike-img {
+        top: 320px;
+        left: 20px;
+        position: relative;
+        display: block;
+      }
+      #stinfo3-bike {
+        position: relative;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Roboto; sans-serif";
+        color: #5e5b55;
+        display: block;
+        top: 295px;
+        left: 60px;
+        width: 300px;
+      }
+      .search {
+        position: absolute;
+        border: none;
+        width: 300px;
+        height: 50px;
+        margin: 70px 0px 0px 100px;
+        z-index: 9;
+      }
       .stinfo3-predictedVal-img {
         top: 320px;
         left: 20px;
@@ -614,7 +614,7 @@
         <!-- <button class="open-button" onclick="openForm()">
                         <span><img class="bar-img" src="./assets/img/barimage.png" alt=""></span>
                     </button> -->
-<<<<<<< HEAD
+
         <div class="poploc" id="centerAddr1"></div>
 
         <div class="open-form">
@@ -656,7 +656,7 @@
                 />
                 <div class="stinfo1-text">
                   {% for value in st_minus %}
-                  <p>{{value.stationName}}</p>
+                  <p>{{value.stationName}} {{value.predVal}}대</p>
                   {% endfor %}
                 </div>
               </div>
@@ -671,7 +671,7 @@
                 />
                 <div class="stinfo2-text">
                   {% for value in st_plus %}
-                  <p>{{value.stationName}}</p>
+                  <p>{{value.stationName}} {{value.predVal}}대</p>
                   {% endfor %}
                 </div>
               </div>
@@ -696,76 +696,12 @@
           </div>
         </div>
         <!-- <div class="search">
-=======
-                        <div class="poploc" id="centerAddr1"></div>
 
-                    
-                    <div class="open-form" >
-                        <button class="open-button" onclick="openForm()">
-                            <img class="bar-img" src="{% static '/assets/img/hamburger_icon.png' %}" alt="">
-                        </button>
-                        <div id="barlogo"style="display: none;">
-                            <img class="bar-logo" id="bar-logo" src="{% static '/assets/img/barlogo.png' %}" alt="">
-                        </div>
-                        <div class="chat-popup" id="myForm" style="display: block;">
-                                <img class="popimg" src="{% static '/assets/img/logo1.png' %}">
-                                <img class="popbottom" src="{% static '/assets/img/bike_bottom.png' %}">
-                                <button class="close-button" id="popexit" onclick="closeForm()">
-                                    <img class="popexit"  src="{% static '/assets/img/back.png' %}">
-                                </button>
-                                    <!-- <div class="poploc" id="centerAddr1"></div> -->
-                                    <!-- <img class="poplocimg" src="{% static '/assets/img/location_sign.png' %}"> -->
-                                    <div id="info1">
-                                        <div class="stinfo1-red">
-                                            <!-- <img src="{% static '/assets/img/red_sign.png' %}"> -->
-                                        </div>
-                                        <div class="stinfo1-red-text">
-                                            보유량 부족 대여소
-                                        </div>
-                                        <div class="stinfo1">
-                                            <img class="stinfo1-img" src="{% static '/assets/img/red_line.png' %}">
-                                            <div class="stinfo1-text">
-                                                {% for value in st_minus %}
-                                                <p>{{value.stationName}}</p>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        <div class="stinfo1-green">
-                                            <!-- <img src="{% static '/assets/img/green_sign.png' %}"> -->
-                                        </div>
-                                        <div class="stinfo1-green-text">
-                                            보유량 과다 대여소
-                                        </div>
-                                        <div class="stinfo2">
-                                            <img class="stinfo1-img" src="{% static '/assets/img/green_line.png' %}">
-                                            <div class="stinfo2-text">
-                                                {% for value in st_plus %}
-                                                <p>{{value.stationName}}</p>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="info2" style="display: none;">
-                                        <div id="stinfo3"></div>
-                                        <!-- <div id="stinfo3-num"></div> -->
-                                        <div id="stinfo3-load"></div>
-
-                                        <img class="stinfo3-predictedVal-img" src="{% static '/assets/img/check_icon.png' %}">
-                                        <div id="stinfo3-predictedVal"></div>
-
-                                        <img class="stinfo3-bike-img" src="{% static '/assets/img/check_icon.png' %}">
-                                        <div id="stinfo3-bike"></div>
-                                    </div>
-                        </div>
-                    </div>       
-                    <!-- <div class="search">
->>>>>>> a9736305ba5c79944443f002bbe41da0a8a45048
                         <input type="text" class="search-text" placeholder="대여소, ID 검색">
                         <button type="button" class="search-button">
                             <img id= "buttonimg" src="assets/img/search_logo.png" alt=""></img>
                         </button>
                     </div> -->
-<<<<<<< HEAD
       </div>
     </div>
     <script
@@ -776,107 +712,7 @@
       var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
       center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
       level : 4 // 지도의 확대 레벨
-=======
-                </div>
-            </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript">
-var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
-level : 4 // 지도의 확대 레벨
-});
 
-var positions =[];
-var lat_temp_max = 0;
-var lat_temp_min = 999;
-var lng_temp_max = 0;
-var lng_temp_min = 999;
-{% for fixed, value in api_dict %}
-var num = {{ value.parkingBikeTotCnt }};
-if (num == 0){
-var positionsRed = [
-    {
-        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(../static/assets/img/red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
-        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
-    },
-];
-positions = positions.concat(positionsRed);
-}else if (num <= 2){
-var positionsYellow = [
-    {
-        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #FFDF8D, #FFDF8D), url(../static/assets/img/yellow_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
-        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ value.stationCode }}</div>'
-    },
-];
-positions = positions.concat(positionsYellow);
-}else{
-var positionsBlue = [
-    {
-        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #80C9C2, #80C9C2), url(../static/assets/img/green_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
-        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
-    },
-];
-positions = positions.concat(positionsBlue);
-}
-
-// 권역 내 중심좌표 만들기
-var lat_value = {{ fixed.stationLatitude }};
-if (lat_value > lat_temp_max) {
-  lat_temp_max = lat_value
-}else if (lat_value < lat_temp_min) {
-  lat_temp_min = lat_value
-}
-
-var lng_value = {{ fixed.stationLongitude }};
-if (lng_value > lng_temp_max) {
-  lng_temp_max = lng_value
-}else if (lng_value < lng_temp_min) {
-  lng_temp_min = lng_value
-}
-
-{% endfor %}
-
-var center_lat = (lat_temp_max + lat_temp_min) / 2
-var center_lng = (lng_temp_max + lng_temp_min) / 2
-var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
-
-// HTML5의 geolocation으로 사용할 수 있는지 확인
-if (navigator.geolocation) {
-
-    // GeoLocation을 이용해서 접속 위치를 얻어옴
-    navigator.geolocation.getCurrentPosition(function(position) {
-
-        var lat = position.coords.latitude; // 위도
-        var lon = position.coords.longitude; // 경도
-
-        var locPosition = new kakao.maps.LatLng(lat, lon)
-
-        // 마커와 인포윈도우를 표시합니다
-        displayMarker(locPosition);
-        // 주소-좌표 변환 객체를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-
-        var result = geocoder.coord2RegionCode(lon, lat,  displayCenterInfo);
-
-        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수
-        function displayCenterInfo(result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                var infoDiv = document.getElementById('centerAddr1');
-
-                for(var i = 0; i < result.length; i++) {
-                    // 행정동의 region_type 값은 'H' 이므로
-                    if (result[i].region_type === 'H') {
-                        infoDiv.innerHTML = result[i].address_name;
-                        break;
-                    }
-                }
-            }
-        }
-
->>>>>>> a9736305ba5c79944443f002bbe41da0a8a45048
       });
 
       var positions =[];
@@ -885,7 +721,7 @@ if (navigator.geolocation) {
       var lng_temp_max = 0;
       var lng_temp_min = 999;
       {% for fixed, value, pred in api_dict %}
-      var num = {{ pred }};
+      var num = {{value.parkingBikeTotCnt}} - {{pred }};
       if (num < 0){
       var positionsRed = [
           {
@@ -975,7 +811,7 @@ if (navigator.geolocation) {
 
           var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
 
-<<<<<<< HEAD
+
           displayMarker(locPosition);
       }
 
@@ -985,92 +821,7 @@ if (navigator.geolocation) {
                           position: positions[i].latlng,
                           map: map
               });
-=======
-        var customOverlay2 = new kakao.maps.CustomOverlay({
-            content: positions[i].title,
-            position: positions[i].latlng,
-            yAnchor: 1,
-            xAnchor: 0.2,
-            map: map
-        });
-}
-// 지도에 마커와 인포윈도우를 표시하는 함수
-function displayMarker(locPosition) {
 
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: locPosition
-    });
-
-    // 지도 중심좌표를 권역 내 중심좌표 위치로 변경
-    map.setCenter(centerPosition);
-
-
-      };
-
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<!-- 검색기능 -->
-<script>
-$('#search_button').click(function(){
-    var search_key = $('#search_input').val()
-    $.ajax({
-        url:'search/',
-        data : { 'search_key':search_key},
-        success:function(data){
-            $('#data_table').html(data)
-        }
-    })
-})
-</script>
-<script type="text/javascript">
-    // button click event
-    var infoDiv = document.getElementById('centerAddr1');
-    
-    function clickStationMarker(clicked_id) {
-        var con = document.getElementById("myForm");
-            if (con.style.display == "none"){
-                con.style.display = "block";
-            } 
-        {% for fixed, value in api_dict %}
-            var id = '{{ value.stationCode }}';
-            if (id == clicked_id){
-                    var stationCode='{{ value.stationCode }}';
-                    var rackTotCnt='{{ fixed.rackTotCnt }}';
-                    var stationName='{{ value.stationName }}';
-                    var parkingBikeTotCnt='{{ value.parkingBikeTotCnt }}';
-                    var shared='{{ value.shared }}';
-                    var stationLatitude='{{fixed.stationLatitude}}';
-                    var stationLongitude='{{fixed.stationLongitude}}';
-                    var predictedVal='{{ fixed.dataId }}';
-
-        }
-        {% endfor %}
-
-            // document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationCode+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
-            // document.getElementById('info2').innerHTML = "<p style='position: absolute;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"<p style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationCode+"</span><div id='roadview3' style='width:90%;height:240px;top:320px;left:3%;'><p>대여소 거치대 수 : "+rackTotCnt+"<p>대여소 자전거 수 : "+parkingBikeTotCnt;
-            // document.getElementById('info2').innerHTML = "<div class='stinfo3' style='position: relative;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"</div><div class='stinfo3-num' style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationCode+"</div><div id='load' style='width: 340px;height: 260px'></div><div class='stinfo3-rack' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 280px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 거치대 수 : "+rackTotCnt+" 대 </div><div class='stinfo3-bike' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 10px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 자전거 수 : "+parkingBikeTotCnt+" 대 </div>";
-
-            document.getElementById('stinfo3').innerHTML = stationName+"<i id='stinfo3-num'>"+stationCode;+"</i>";
-            // document.getElementById('stinfo3-num').innerText = stationCode;
-            document.getElementById('stinfo3-load').innerHTML = "<div id='roadview3' style='width:90%;height:280px;top:290px;left:5%;'></div>";
-            document.getElementById('stinfo3-predictedVal').innerText = '예측 필요량 : '+predictedVal;
-            document.getElementById('stinfo3-bike').innerText = '현황 : '+parkingBikeTotCnt+' / '+ rackTotCnt;
-            document.getElementById("info2").style.display ='block';
-            document.getElementById("info1").style.display ='none';
-            document.getElementById("popexit").style.display ='block';
-            
-            var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div
-            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-
-            var stPosition = new kakao.maps.LatLng(parseFloat(stationLatitude), parseFloat(stationLongitude));
-            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-            roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {
-                roadview.setPanoId(panoId,stPosition); //panoId와 중심좌표를 통해 로드뷰 실행
- 
->>>>>>> a9736305ba5c79944443f002bbe41da0a8a45048
 
               var customOverlay2 = new kakao.maps.CustomOverlay({
                   content: positions[i].title,
