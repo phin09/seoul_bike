@@ -66,6 +66,15 @@ class SubwayTot(models.Model):
 #     class Meta:
 #         db_table = "subway_prop"  # custom table name
 
+class SubwayRideGetoff(models.Model):
+    dataId = models.IntegerField(default=0)
+    month = models.IntegerField(default=0)
+    hour = models.IntegerField(default=0)
+    SubGetoff = models.IntegerField()
+    SubRide = models.IntegerField()
+    class Meta:
+        db_table = "subway_RideGetoff"  # custom table name
+
 
 class Weather(models.Model):
     year = models.IntegerField(default=0)
@@ -84,7 +93,5 @@ class Weather(models.Model):
 
 
 # subwayProperties.csv, subwayTot.csv 각기 table 만들어 저장하기. 모델 업데이트용.
-
-
 # on_delete=models.PROTECT 참조값 사라져도 삭제하지 않음
 # on_delete=models.SET_DEFAULT 참조값 사라지면 default(0)으로 변경

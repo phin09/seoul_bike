@@ -1,3 +1,5 @@
+import lightgbm
+
 from django.shortcuts import render
 from django.forms import model_to_dict
 
@@ -25,12 +27,16 @@ def bikeMap(request):
     st_dict = []    # list of dicts
     for item in fixed_dict:
         query = StationNow.objects.filter(pk=item['stationCode'])
-        st_dict = st_dict + list(query.values('stationName', 'parkingBikeTotCnt', 'stationCode'))
+        st_dict += list(query.values('stationName', 'parkingBikeTotCnt', 'stationCode'))
 
     payload = [(f, s) for f, s in zip(fixed_dict, st_dict)]
     
     # 데이터 업데이트를 위해서 shared, 예측값 등 출력할 column 추가해야 됨
     # return HttpResponse(st_dict)
+
+
+    rentModel = joblib.load('./Model/RentModel.pkl')
+    returnModel = joblib.load('./Model/RentModel.pkl')
 
     # 임시
     st_plus = st_dict[:5]
