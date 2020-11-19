@@ -1,4 +1,4 @@
-import lightgbm
+#import lightgbm
 
 from django.shortcuts import render
 from django.forms import model_to_dict
@@ -35,8 +35,8 @@ def bikeMap(request):
     # return HttpResponse(st_dict)
 
 
-    rentModel = joblib.load('./Model/RentModel.pkl')
-    returnModel = joblib.load('./Model/RentModel.pkl')
+    # rentModel = joblib.load('./Model/RentModel.pkl')
+    # returnModel = joblib.load('./Model/RentModel.pkl')
 
     # 임시
     st_plus = st_dict[:5]
