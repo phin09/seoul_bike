@@ -67,17 +67,18 @@ class SubwayTot(models.Model):
 #         db_table = "subway_prop"  # custom table name
 
 
-class Weather(models.Model):    # 실시간 업데이트할 API 찾아야
-    ta = models.FloatField()
-    rn = models.FloatField()
-    ws = models.FloatField()
-    wd = models.FloatField()
-    hm = models.FloatField()
-    ss = models.FloatField()
-    icsr = models.FloatField()
-    dsnw = models.FloatField()
-    hr3Fhsc = models.FloatField()
-    created_at = models.DateTimeField(default=timezone.localtime, editable=False)
+class Weather(models.Model):
+    year = models.IntegerField(default=0)
+    month = models.IntegerField(default=0)
+    day = models.IntegerField(default=0)
+    hour = models.IntegerField(default=0)
+    T1H = models.FloatField()   # 기온
+    RN1 = models.FloatField()   # 1시간 강수량
+    REH = models.FloatField()   # 습도
+    PTY = models.FloatField()   # 강수형태
+    VEC = models.FloatField()   # 풍향
+    WSD = models.FloatField()   # 풍속
+    S06 = models.FloatField()   # 6시간 신적설
     class Meta:
         db_table = "weather"  # custom table name
 
