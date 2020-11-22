@@ -14,7 +14,6 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # stationLatitude 위도
 # stationLongitude    경도
 
-
 class Area(models.Model):
     dataId = models.IntegerField(default=0, primary_key=True)
     stationCode = models.CharField(max_length=10)
@@ -48,8 +47,8 @@ class StationNow(models.Model):
 
 
 class DailyStation(models.Model):   # pk=id는 index임
-    dataId = models.ForeignKey(
-        Area, on_delete=models.CASCADE, db_column='dataId')
+    ''' Model for '''
+    dataId = models.ForeignKey(Area, on_delete=models.CASCADE, db_column='dataId')
     parkingBikeTotCnt = models.IntegerField(default=0)
     created_at = models.CharField(max_length=20)
 
@@ -77,11 +76,6 @@ class PredictValue(models.Model):
     class Meta:
         db_table = "predicted_value"
 
-
-# class SubwayProp(models.Model):
-#     dataId = models.IntegerField(default=0)
-#     class Meta:
-#         db_table = "subway_prop"  # custom table name
 
 class SubwayRideGetoff(models.Model):
     dataId = models.IntegerField(default=0)

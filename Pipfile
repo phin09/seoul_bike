@@ -12,6 +12,7 @@ pandas = "*"
 requests = "*"
 lightgbm = "*"
 joblib = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.7"

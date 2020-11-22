@@ -1,11 +1,15 @@
 # pylint: skip-file
 
 import joblib
-
-import lightgbm
+import pickle
 import random
+import lightgbm
+from collections import namedtuple
+
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
+
 
 from django.utils import timezone
 from django.http import HttpResponse
@@ -49,8 +53,6 @@ def bikeMap(request):
         query = StationNow.objects.filter(pk=item['stationCode'])
         st_dict += list(query.values('stationName',
                                      'parkingBikeTotCnt', 'stationCode'))
-
-    
 
     # 데이터 업데이트를 위해서 shared, 예측값 등 출력할 column 추가해야 됨
 
@@ -97,46 +99,69 @@ def bikeMap(request):
     hr3Fhsc = weather.S06  # 6시간 신적설량
 
     FP = weather.PTY  # Form of Precipitation
+
     '''
     FP(Form of Precipitation)
     없음(0), 비(1), 비/눈(2),, 소나기(4), 빗방울(5)
     눈(3), 빗방울/눈날림(6), 눈날림(7) 여기서 비/눈은 비와 눈이 섞여 오는 것을 의미 (진눈개비)
     '''
-    w = [ta, rn, ws, wd, hm, ss, icsr, 0, hrdFhsc] if FP in [
-        1, 2, 4, 5] else [ta, 0, ws, wd, hm, ss, icsr, dsnw, hr3Fhsc]
+    w = [ta, rn, ws, wd, hm, ss, icsr, 0, hrdFhsc] if FP in [1, 2, 4, 5] else [ta, 0, ws, wd, hm, ss, icsr, dsnw, hr3Fhsc]
 
     Prop = []
     for i in Id:
-        # geo = Area.objects.filter(dataId=i)[0]
-        # subT = SubwayTot.objects.filter(
-        #     dataId=i, month=now.month, day=now.day)[0]
+        geo = Area.objects.filter(dataId=i)
+        subT = SubwayTot.objects.filter(dataId=i, month=now.month, day=now.day)
+        subRG = SubwayRideGetoff.objects.filter(dataId=i, month=now.month, hour=now.hour)
+        
+        geoTuple = namedtuple('geo',('rackTotCnt', 'stationLatitude', 'stationLongitude', 'PopTot', 'distance_subway'))
+        subTuple = namedtuple('subT',('tot_ride','tot_getoff'))
+        rgTuple = namedtuple('subRG', ('SubGetoff','SubRide'))
 
-        # subRG = SubwayRideGetoff.objects.filter(
-        #     dataId=i, month=now.month, hour=now.hour)[0]
+        geo = geo[0] if geo else geoTuple(0, 0, 0 ,0)
+        subT = subT[0] if subT else subTuple(0,0)
+        subRG = subRG[0] if subRG else rgTuple(0,0)
 
-        # Prop.append([geo.rackTotCnt,
-        #              geo.stationLatitude,
-        #              geo.stationLongitude,
-        #              geo.PopTot,
-        #              geo.distance_subway,
-        #              subT.tot_ride,
-        #              subT.tot_getoff,
-        #              subRG.SubGetoff,
-        #              subRG.SubRide
-        #              ])
-        Prop.append([random.randint(-1000, 1000) / 1000 for i in range(9)])
+        Prop.append([geo.rackTotCnt,
+                     geo.stationLatitude,
+                     geo.stationLongitude,
+                     geo.PopTot,
+                     geo.distance_subway,
+                     subT.tot_ride,
+                     subT.tot_getoff,
+                     subRG.SubGetoff,
+                     subRG.SubRide])
 
-    inputs = [date + w + p for p in Prop]
+    Prop = [w + p for p in Prop]
+    cols = ['ta',
+            'rn',
+            'ws',
+            'wd',
+            'hm',
+            'ss',
+            'icsr',
+            'dsnw',
+            'hr3Fhsc',
+            'rackTotCnt',
+            'stationLatitude',
+            'stationLongitude',
+            'pop_total',
+            'distance_subway',
+            'tot_ride',
+            'tot_getoff',
+            'SubwayRide',
+            'SubwayGetoff']
+
+    scaler = joblib.load('./Model/scaler.sav')
+    ScaledProp = scaler.transform(Prop)
+    
+    inputs = [date + list(p) for p in Prop]
 
     rentModel = joblib.load('./Model/RentModel.pkl')
     returnModel = joblib.load('./Model/ReturnModel.pkl')
-
-    inputs = np.array(inputs)
+    
     predRent = rentModel.predict(inputs)
     predReturn = returnModel.predict(inputs)
-
     predAmount = np.around(predReturn - predRent)
-    print(predAmount)
 
     payload = [(f, s, int(pred)) for f, s, pred in zip(fixed_dict, st_dict, predAmount)]
 
@@ -145,4 +170,5 @@ def bikeMap(request):
 
     return render(request, 'index.html', {'api_dict': payload,
                                           'kakao_service_key': KAKAO_SERVICES_KEY,
-                                          'st_plus': st_plus, 'st_minus': st_minus})
+                                          'st_plus': st_plus, 
+                                          'st_minus': st_minus})
