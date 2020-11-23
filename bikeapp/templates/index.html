@@ -721,7 +721,7 @@
       var lng_temp_max = 0;
       var lng_temp_min = 999;
       {% for fixed, value, pred in api_dict %}
-      var num = {{value.parkingBikeTotCnt}} - {{pred }};
+      var num = {{value.parkingBikeTotCnt}} - {{pred}};
       if (num < 0){
       var positionsRed = [
           {
@@ -871,7 +871,8 @@
               }
           {% for fixed, value, pred in api_dict %}
               var id = '{{ value.stationCode }}';
-              if (id == clicked_id){
+              if (id == clicked_id)
+                  {
                       var stationCode='{{ value.stationCode }}';
                       var rackTotCnt='{{ fixed.rackTotCnt }}';
                       var stationName='{{ value.stationName }}';
@@ -880,8 +881,7 @@
                       var stationLatitude='{{fixed.stationLatitude}}';
                       var stationLongitude='{{fixed.stationLongitude}}';
                       var predictedVal='{{ pred }}';
-
-          }
+                  }
           {% endfor %}
 
               // document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationCode+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
