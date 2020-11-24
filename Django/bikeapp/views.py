@@ -105,7 +105,7 @@ def bikeMap(request):
     없음(0), 비(1), 비/눈(2),, 소나기(4), 빗방울(5)
     눈(3), 빗방울/눈날림(6), 눈날림(7) 여기서 비/눈은 비와 눈이 섞여 오는 것을 의미 (진눈개비)
     '''
-    w = [ta, rn, ws, wd, hm, ss, icsr, 0, hrdFhsc] if FP in [1, 2, 4, 5] else [ta, 0, ws, wd, hm, ss, icsr, dsnw, hr3Fhsc]
+    w = [ta, rn, ws, wd, hm, ss, icsr, 0, hr3Fhsc] if FP in [1, 2, 4, 5] else [ta, 0, ws, wd, hm, ss, icsr, dsnw, hr3Fhsc]
 
     Prop = []
     for i in Id:
