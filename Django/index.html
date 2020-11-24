@@ -1,0 +1,864 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Seoul Bike</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- CSS here -->
+        <link rel="shortcut icon" href="{% static '/assets/img/facvicon.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="{% static '/assets/css/bootstrap.min.css' %}"> 
+        <link rel="stylesheet" href="{% static '/assets/css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/slicknav.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/price_rangs.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/themify-icons.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/themify-icons.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/slick.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+        <!-- <link rel="stylesheet" href="assets/css/responsive.css"> -->
+        <style>
+    .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px; z-index: 1;}
+    .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+    /* .map_wrap {position:relative;width:100%;height:800px;padding-left: 0.5%;padding-right: 0.5%;padding-top: 1%;} */
+    .map_wrap {position:absolute;width:100%;height:98%;padding-left: 5px;padding-right:5px;padding-top: 15px; border-color: black;}
+
+    /* #menu_wrap {position:absolute;top:0;left:10px;bottom:0;width:500px;margin:30px 0 30px 10px;padding:10px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;} */
+    .bg_white {background:#fff;}
+    /* #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+    #menu_wrap .option{text-align: center;}
+    #menu_wrap .option p {margin:10px 0;}  
+    #menu_wrap .option button {margin-left:5px;} */
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-form
+ {
+  z-index: 2;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  /* opacity: 0.8; */
+  position: absolute;
+  height: 100%;
+  width: 50px;
+}
+
+.open-button {
+  /* z-index: 3; */
+  background-color: white;
+  color:  #555;
+  padding: 16px 9px;
+  border: none;
+  /* cursor: pointer; */
+  /* opacity: 0.8; */
+  position: absolute;
+
+  /* width: 30px; */
+  /* top: 25px;
+  left: 15px;
+  right: 15px;
+  width: 300px; */
+}
+.close-button {
+  /* z-index: 3; */
+  background-color: white;
+  color:  #555;
+  
+  border: none;
+  /* cursor: pointer; */
+  /* opacity: 0.8; */
+  position: relative;
+  top:8px;
+  left:380px;
+  display: none;
+
+  /* width: 30px; */
+  /* top: 25px;
+  left: 15px;
+  right: 15px;
+  width: 300px; */
+}
+
+.bar-img{
+    position: static ;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    vertical-align:top;
+}
+
+.bar-logo{
+    position: static ;
+    width: 30px;
+    height: 600px;
+    padding-top: 180px;
+    margin: 0;
+    vertical-align:top;
+    
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  overflow: auto;
+  padding-top: 10px;
+  display: none;
+  /* opacity: 0.8; */
+  position: absolute;
+  /* top: 85px; */
+  left: 50px;
+  /* right: 15px; */
+  border: none;
+  /* border: 3px solid #f1f1f1; */
+  z-index: 9;
+  background-color: white;
+  width: 420px;
+  height: 100%;
+}
+.popimg{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    margin: 0px 0px 0px 60px;
+    opacity: 0.8;
+    /* padding-top: 0;
+    padding-left: 60px;     */
+}
+
+.poploc{
+    position: fixed;
+    top: 3%;
+    /* padding-top:10px;
+    margin: 155px 0px 0px 65px; */
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    /* font-size: 1.5em; */
+    font-size: 18px;
+    color:#5E5B55;
+    font-weight: bold;
+    text-align: right;
+    z-index: 3;
+    left: 83%;
+    opacity: 0.5;
+    
+    
+}
+.poplocimg{
+    position:relative;
+    width: 25px;
+    height: 25px;
+    /* margin: 170px 0px 0px 30px; */
+    top:198px;
+}
+.popbottom{
+    top:820px;
+    left:10px;
+    position: absolute;
+    width: 400px;
+    height: auto;
+    z-index:20;
+    
+}
+
+.stinfo1-red{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 215px 0px 0px 40px;
+    background-color: #F17D69;
+    border-radius: 50%;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.stinfo1-red-text{
+    position: absolute;
+    float: left;
+    /* font-size: 1.5em; */
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    margin: 210px 0px 0px 85px;
+
+    color: #5E5B55;
+}
+
+.stinfo1-green{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 498px 0px 0px 40px;
+    background-color: #80C9C2;
+    border-radius: 50%;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+.stinfo1-green-text{
+    position: absolute;
+    float: left;
+    /* font-size: 1.5em; */
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    margin: 495px 0px 0px 85px;
+    color: #5E5B55;
+}
+
+#stinfo3{
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    font-family:"Roboto; sans-serif";
+    margin: 210px 0px 0px 40px;
+    color: #5E5B55;
+    display: block;
+    width:360px;
+    height: auto;
+    overflow: hidden;
+}
+
+#stinfo3-num{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Roboto; sans-serif";
+    margin: 10px 0px 0px 10px;
+    color: #5E5B55;
+    display: inline-block;
+    margin:0px 10px 0px 10px;
+}
+
+/* #stinfo3-road{
+    position: absolute;
+    margin-top : 285px;
+    border: none;
+    z-index: 15;
+    background-color: #F8F6F1;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 340px;
+    height: 260px;
+} */
+
+.stinfo3-predictedVal-img{
+    top:320px;
+    left:20px;
+    position: relative;
+    display: block;
+}
+
+#stinfo3-predictedVal{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:  "Roboto; sans-serif";
+    color: #5E5B55;
+    display: block;
+    top:295px;
+    left:60px;
+    width: 300px;
+}
+
+.stinfo3-bike-img{
+    top:320px;
+    left:20px;
+    position: relative;
+    display: block;
+}
+#stinfo3-bike{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:  "Roboto; sans-serif";
+    color: #5E5B55;
+    display: block;
+    top:295px;
+    left:60px;
+    width: 300px;
+}
+.search{
+    position: absolute;
+    border: none;
+    width: 300px;
+    height: 50px;
+    margin: 70px 0px 0px 100px;
+    z-index: 9;
+}
+
+.search-text {
+    position: absolute;
+    border: none;
+    background-color: white;
+    box-sizing: border-box;
+    opacity: 0.8;
+    padding: 10px 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color:#C8C8C8;
+    border-radius: 10px 8px 10px 8px;
+    width: 300px;
+
+    /* height: 50px; */
+    border: none;
+    /* margin: 45px 0px 0px 100px; */
+
+    /* background-image : url(assets/img/logo/logo.png); 
+    background-position:top right; 
+    background-repeat:no-repeat; */
+}
+.search-button{
+    position: absolute;
+    /* background-color: white; */
+    border: none;
+    margin: 5px 0 0 250px;
+    /* padding: 0 0 0 25px; */
+    width:35px;
+    height:35px;
+    z-index: 10;
+    background-color: transparent !important;
+}
+#buttonimg{
+    /* position: relative; */
+    width: 30px;
+    height: 30px;
+    /* background-color: transparent !important; */
+    margin: 0px;
+    /* padding: 0px 0px 0px 10px; */
+}
+
+.stinfo1 {
+  position: absolute;
+  margin-top : 255px;
+  margin-left : 20px;
+  border: none;
+  z-index: 15;
+  background-color: #F8F6F1;
+  width: 400px;
+  height: 235px;
+}
+
+.stinfo1-text{
+    position: absolute;
+    margin-top:15px;
+    margin-left:50px;
+    margin-right:10px;
+    width: 330px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+}
+/* .stinfo1-text{
+    position: absolute;
+    margin-top:30px;
+    margin-left:70px;
+    margin-right:10px;
+    width: 310px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+} */
+
+.stinfo1-text p{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    margin-top: 8px;
+    margin-left: 15px;
+    color: #818080;
+    width: 270px;
+    position: relative;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.stinfo1-img{
+    position: absolute;
+    width: 4px;
+    height:235px;
+    margin-left:33px;
+}
+
+.stinfo2 {
+  position: absolute;
+  margin-top : 540px;
+  margin-left : 20px;
+  border: none;
+  z-index: 15;
+  background-color: #F8F6F1;
+  width: 400px;
+  height: 235px;
+}
+.stinfo2-text{
+    position: absolute;
+    margin-top:15px;
+    margin-left:50px;
+    margin-right:10px;
+    width: 330px;
+    height:200px;
+    background-color: white;
+    box-shadow:5px 5px 10px 0px grey;
+}
+
+.stinfo2-text p{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    margin-top: 8px;
+    margin-left: 15px;
+    color: #818080;
+    width: 270px;
+    position: relative;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.stinfo2-img{
+    position: absolute;
+    width: 4px;
+    height:235px;
+    margin-left:33px;
+}
+
+/* Add styles to the form container */
+.form-container {
+  /* max-width: 300px; */
+  padding: 10px;
+  border: none;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+  border: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  /* margin-bottom:10px; */
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.headerimg{
+    margin-top: 5px;
+}
+
+.show {display:block;}
+</style>
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static '/assets/img/logo/logo.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+       <!-- <div class="header-area header-transparrent">
+           <div class="headder-top header-sticky">
+            <a href="#"><img class="headerimg" src="./assets/img/logo_with_background.png" alt=""></a>
+                
+           </div>
+       </div> -->
+        <!-- Header End -->
+    </header>
+    <script>
+        function openForm() {
+            // var con = document.getElementById("myForm");
+            // var logo = document.getElementById("barlogo");
+            
+            if (document.getElementById("myForm").style.display == "none"){
+                document.getElementById("myForm").style.display = "block";
+                document.getElementById("barlogo").style.dsiplay= "block";
+                
+            } else {
+                document.getElementById("myForm").style.display = "none",
+                document.getElementById("barlogo").style.dsiplay= "none";
+            }
+        }
+        function closeForm() {
+        document.getElementById("info2").style.display ='none';
+        document.getElementById("info1").style.display ='block';
+        document.getElementById("popexit").style.display ='none';
+        }
+
+     </script>
+            <div class="map_wrap">
+                <div id="map" style="width:100%;height:100%;">
+                    <!-- <button class="open-button" onclick="openForm()">
+                        <span><img class="bar-img" src="./assets/img/barimage.png" alt=""></span>
+                    </button> -->
+                        <div class="poploc" id="centerAddr1"></div>
+
+                    
+                    <div class="open-form" >
+                        <button class="open-button" onclick="openForm()">
+                            <img class="bar-img" src="{% static '/assets/img/hamburger_icon.png' %}" alt="">
+                        </button>
+                        <div id="barlogo"style="display: none;">
+                            <img class="bar-logo" id="bar-logo" src="{% static '/assets/img/barlogo.png' %}" alt="">
+                        </div>
+                        <div class="chat-popup" id="myForm" style="display: block;">
+                                <img class="popimg" src="{% static '/assets/img/logo1.png' %}">
+                                <img class="popbottom" src="{% static '/assets/img/bike_bottom.png' %}">
+                                <button class="close-button" id="popexit" onclick="closeForm()">
+                                    <img class="popexit"  src="{% static '/assets/img/back.png' %}">
+                                </button>
+                                    <!-- <div class="poploc" id="centerAddr1"></div> -->
+                                    <!-- <img class="poplocimg" src="{% static '/assets/img/location_sign.png' %}"> -->
+                                    <div id="info1">
+                                        <div class="stinfo1-red">
+                                            <!-- <img src="{% static '/assets/img/red_sign.png' %}"> -->
+                                        </div>
+                                        <div class="stinfo1-red-text">
+                                            보유량 부족 대여소
+                                        </div>
+                                        <div class="stinfo1">
+                                            <img class="stinfo1-img" src="{% static '/assets/img/red_line.png' %}">
+                                            <div class="stinfo1-text">
+                                                {% for value in st_minus %}
+                                                <p>{{value.stationName}}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="stinfo1-green">
+                                            <!-- <img src="{% static '/assets/img/green_sign.png' %}"> -->
+                                        </div>
+                                        <div class="stinfo1-green-text">
+                                            보유량 과다 대여소
+                                        </div>
+                                        <div class="stinfo2">
+                                            <img class="stinfo1-img" src="{% static '/assets/img/green_line.png' %}">
+                                            <div class="stinfo2-text">
+                                                {% for value in st_plus %}
+                                                <p>{{value.stationName}}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="info2" style="display: none;">
+                                        <div id="stinfo3"></div>
+                                        <!-- <div id="stinfo3-num"></div> -->
+                                        <div id="stinfo3-load"></div>
+
+                                        <img class="stinfo3-predictedVal-img" src="{% static '/assets/img/check_icon.png' %}">
+                                        <div id="stinfo3-predictedVal"></div>
+
+                                        <img class="stinfo3-bike-img" src="{% static '/assets/img/check_icon.png' %}">
+                                        <div id="stinfo3-bike"></div>
+                                    </div>
+                        </div>
+                    </div>       
+                    <!-- <div class="search">
+                        <input type="text" class="search-text" placeholder="대여소, ID 검색">
+                        <button type="button" class="search-button">
+                            <img id= "buttonimg" src="assets/img/search_logo.png" alt=""></img>
+                        </button>
+                    </div> -->
+                </div>
+            </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript">
+var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
+level : 4 // 지도의 확대 레벨
+});
+
+var positions =[];
+var lat_temp_max = 0;
+var lat_temp_min = 999;
+var lng_temp_max = 0;
+var lng_temp_min = 999;
+{% for fixed, value in api_dict %}
+var num = {{ value.parkingBikeTotCnt }};
+if (num == 0){
+var positionsRed = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(../static/assets/img/red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
+        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
+    },
+];
+positions = positions.concat(positionsRed);
+}else if (num <= 2){
+var positionsYellow = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #FFDF8D, #FFDF8D), url(../static/assets/img/yellow_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
+        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ value.stationCode }}</div>'
+    },
+];
+positions = positions.concat(positionsYellow);
+}else{
+var positionsBlue = [
+    {
+        content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #80C9C2, #80C9C2), url(../static/assets/img/green_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ fixed.dataId }}</button>',
+        latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
+        title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
+    },
+];
+positions = positions.concat(positionsBlue);
+}
+
+// 권역 내 중심좌표 만들기
+var lat_value = {{ fixed.stationLatitude }};
+if (lat_value > lat_temp_max) {
+  lat_temp_max = lat_value
+}else if (lat_value < lat_temp_min) {
+  lat_temp_min = lat_value
+}
+
+var lng_value = {{ fixed.stationLongitude }};
+if (lng_value > lng_temp_max) {
+  lng_temp_max = lng_value
+}else if (lng_value < lng_temp_min) {
+  lng_temp_min = lng_value
+}
+
+{% endfor %}
+
+var center_lat = (lat_temp_max + lat_temp_min) / 2
+var center_lng = (lng_temp_max + lng_temp_min) / 2
+var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
+
+// HTML5의 geolocation으로 사용할 수 있는지 확인
+if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옴
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude; // 위도
+        var lon = position.coords.longitude; // 경도
+
+        var locPosition = new kakao.maps.LatLng(lat, lon)
+
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition);
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        var result = geocoder.coord2RegionCode(lon, lat,  displayCenterInfo);
+
+        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수
+        function displayCenterInfo(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var infoDiv = document.getElementById('centerAddr1');
+
+                for(var i = 0; i < result.length; i++) {
+                    // 행정동의 region_type 값은 'H' 이므로
+                    if (result[i].region_type === 'H') {
+                        infoDiv.innerHTML = result[i].address_name;
+                        break;
+                    }
+                }
+            }
+        }
+
+      });
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을 때 마커 표시 위치와 인포윈도우 내용을 설정
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
+
+    displayMarker(locPosition);
+}
+
+for (var i = 0; i < positions.length; i ++) {
+        var customOverlay1 = new kakao.maps.CustomOverlay({
+                    content: positions[i].content,
+                    position: positions[i].latlng,
+                    map: map
+        });
+
+        var customOverlay2 = new kakao.maps.CustomOverlay({
+            content: positions[i].title,
+            position: positions[i].latlng,
+            yAnchor: 1,
+            xAnchor: 0.2,
+            map: map
+        });
+}
+// 지도에 마커와 인포윈도우를 표시하는 함수
+function displayMarker(locPosition) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    // 지도 중심좌표를 권역 내 중심좌표 위치로 변경
+    map.setCenter(centerPosition);
+
+
+      };
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- 검색기능 -->
+<script>
+$('#search_button').click(function(){
+    var search_key = $('#search_input').val()
+    $.ajax({
+        url:'search/',
+        data : { 'search_key':search_key},
+        success:function(data){
+            $('#data_table').html(data)
+        }
+    })
+})
+</script>
+<script type="text/javascript">
+    // button click event
+    var infoDiv = document.getElementById('centerAddr1');
+    
+    function clickStationMarker(clicked_id) {
+        var con = document.getElementById("myForm");
+            if (con.style.display == "none"){
+                con.style.display = "block";
+            } 
+        {% for fixed, value in api_dict %}
+            var id = '{{ value.stationCode }}';
+            if (id == clicked_id){
+                    var stationCode='{{ value.stationCode }}';
+                    var rackTotCnt='{{ fixed.rackTotCnt }}';
+                    var stationName='{{ value.stationName }}';
+                    var parkingBikeTotCnt='{{ value.parkingBikeTotCnt }}';
+                    var shared='{{ value.shared }}';
+                    var stationLatitude='{{fixed.stationLatitude}}';
+                    var stationLongitude='{{fixed.stationLongitude}}';
+                    var predictedVal='{{ fixed.dataId }}';
+
+        }
+        {% endfor %}
+
+            // document.getElementById('info2').innerHTML = "<div id='roadview3' style='width:100%;height:300px;'></div><p>거치소명 : "+stationName+"<p style='width:500px'>거치소 ID : "+stationCode+"<p>거치 수 : "+rackTotCnt+"<p>자전거주차총건수 : "+parkingBikeTotCnt;
+            // document.getElementById('info2').innerHTML = "<p style='position: absolute;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"<p style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationCode+"</span><div id='roadview3' style='width:90%;height:240px;top:320px;left:3%;'><p>대여소 거치대 수 : "+rackTotCnt+"<p>대여소 자전거 수 : "+parkingBikeTotCnt;
+            // document.getElementById('info2').innerHTML = "<div class='stinfo3' style='position: relative;font-size: 24px;font-weight: bold;font-family:Roboto; sans-serif;margin: 210px 0px 0px 40px;color: #5E5B55;display: block;width:360px;overflow: hidden;'>"+stationName+"</div><div class='stinfo3-num' style='position: relative;font-size: 16px;font-weight: bold;font-family: Roboto; sans-serif;margin: 10px 0px 0px 10px;color: #5E5B55;display: inline;margin:0px 10px 0px 10px;'>"+stationCode+"</div><div id='load' style='width: 340px;height: 260px'></div><div class='stinfo3-rack' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 280px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 거치대 수 : "+rackTotCnt+" 대 </div><div class='stinfo3-bike' style='position: relative;font-size: 20px;font-weight: bold;font-family:  Roboto; sans-serif;margin: 10px 0px 0px 0px;color: #5E5B55;display: block;'>대여소 자전거 수 : "+parkingBikeTotCnt+" 대 </div>";
+
+            document.getElementById('stinfo3').innerHTML = stationName+"<i id='stinfo3-num'>"+stationCode;+"</i>";
+            // document.getElementById('stinfo3-num').innerText = stationCode;
+            document.getElementById('stinfo3-load').innerHTML = "<div id='roadview3' style='width:90%;height:280px;top:290px;left:5%;'></div>";
+            document.getElementById('stinfo3-predictedVal').innerText = '예측 필요량 : '+predictedVal;
+            document.getElementById('stinfo3-bike').innerText = '현황 : '+parkingBikeTotCnt+' / '+ rackTotCnt;
+            document.getElementById("info2").style.display ='block';
+            document.getElementById("info1").style.display ='none';
+            document.getElementById("popexit").style.display ='block';
+            
+            var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div
+            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+            var stPosition = new kakao.maps.LatLng(parseFloat(stationLatitude), parseFloat(stationLongitude));
+            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+            roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {
+                roadview.setPanoId(panoId,stPosition); //panoId와 중심좌표를 통해 로드뷰 실행
+ 
+
+            });
+
+            // var con = document.getElementById("myForm");
+            // if (con.style.display = "none"){
+            //     con.style.display = "block";
+            // } 
+        }
+    
+    function clickHome() {
+        document.getElementById("info1").style.display ='block';
+        document.getElementById("info2").style.display ='none';
+    }
+
+
+    
+    </script>
+
+        <!-- </div> -->
+
+    <!-- </section> -->
+    <!-- ================ contact section end ================= -->
+    
+
+<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <!-- <script src="./assets/js/popper.min.js"></script> -->
+        <!-- <script src="./assets/js/bootstrap.min.js"></script> -->
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '/assets/js/jquery.slicknav.min.js' %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static '/assets/js/slick.min.js' %}"></script>
+        <script src="{% static '/assets/js/price_rangs.js' %}"></script>
+        
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '/assets/js/wow.min.js' %}"></script>
+		<script src="{% static '/assets/js/animated.headline.js' %}"></script>
+		
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '/assets/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static '/assets/js/jquery.sticky.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.magnific-popup.js' %}"></script>
+
+        <!-- contact js -->
+        <script src="{% static '/assets/js/contact.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.form.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static '/assets/js/mail-script.js' %}"></script>
+        <script src="{% static '/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static '/assets/js/plugins.js' %}"></script>
+        <script src="{% static '/assets/js/main.js' %}"></script>
+        
+    </body>
+    
+    </html>
