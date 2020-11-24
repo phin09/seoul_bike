@@ -12,6 +12,8 @@ requests = "*"
 lightgbm = "*"
 joblib = "*"
 sklearn = "*"
+numpy = "==1.19.3"
+scikit-learn = "==0.22.2"
 
 [requires]
 python_version = "3.7"
