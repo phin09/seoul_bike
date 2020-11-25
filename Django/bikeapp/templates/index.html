@@ -606,7 +606,7 @@
       function closeForm() {
         document.getElementById("info2").style.display = "none";
         document.getElementById("info1").style.display = "block";
-        document.getElementById("popexit").style.display = "none";
+        document.getElementById("popexit").style.display = "block";
       }
     </script>
     <div class="map_wrap">
@@ -725,9 +725,9 @@
       if (num < 0){
       var positionsRed = [
           {
-              content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(../static/assets/img/red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ pred }}</button>',
+              content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(../static/assets/img/red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.dataId }}>{{ pred }}</button>',
               latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
+              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ fixed.dataId }}</div>'
           },
       ];
       positions = positions.concat(positionsRed);
@@ -736,7 +736,7 @@
           {
               content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #FFDF8D, #FFDF8D), url(../static/assets/img/yellow_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ pred }}</button>',
               latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ value.stationCode }}</div>'
+              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ fixed.dataId }}</div>'
           },
       ];
       positions = positions.concat(positionsYellow);
@@ -745,7 +745,7 @@
           {
               content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #80C9C2, #80C9C2), url(../static/assets/img/green_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ pred }}</button>',
               latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ value.stationCode }}</div>'
+              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ fixed.dataId }}</div>'
           },
       ];
       positions = positions.concat(positionsBlue);
