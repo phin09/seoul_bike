@@ -1,15 +1,15 @@
 # pylint: skip-file
 
+import os
 import joblib
 import pickle
 import random
-import lightgbm
 from collections import namedtuple
 
+import lightgbm
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-
 
 from django.utils import timezone
 from django.http import HttpResponse
