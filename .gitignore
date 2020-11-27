@@ -1,7 +1,7 @@
 # Custom
 
 # Django SEKRET KEY
-secrets.json
+.env
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm,windows,python,django
