@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seoul Bike</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/assets/css/login_style.css' %}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{% static '/assets/img/facvicon.ico' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <style>
+    body {
+      width:100%; height:100%;
+      margin-left:2%;
+      background-image : {% static '/assets/img/logo_with_background.png' %};
+      background-repeat : no-repeat;
+      /* background-size : cover; */
+    } 
+    </style>
+
+  <body id="wrap">
+    <div id="main">
+      <div id="contents">
+        <img
+          id="contentsLogo"
+          src="{% static '/assets/img/seoulbike_logo.png' %}"/>
+
+        <div class="login-page">
+          <div class="form">
+            <form method="POST" class="login-form" action=".">
+              {% csrf_token %}
+              <input
+                type="text"
+                placeholder="ID"
+                id="username"
+                name="username"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                name="password"
+              />
+              <button type="submit" name="btnform1">Login</button>
+              <p class="message">
+                {{error}}
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

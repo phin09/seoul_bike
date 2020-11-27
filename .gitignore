@@ -348,4 +348,4 @@ $RECYCLE.BIN/
 #MAC
 .DS_Store
 .icloud
-# End of https://www.toptal.com/developers/gitignore/api/pycharm,windows,python,django
+.env
