@@ -16,12 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import bikeapp
-import account
+import core
+import user
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', account.views.login, name='login'),
-    path('home/', include('core.urls'), name='home'),
-    path('user/', include('user.urls'), name='user' ),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', include('core.urls'), name='core'),
+    #path('user/', include('user.urls'), name='user' ),
 ]

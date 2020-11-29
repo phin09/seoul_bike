@@ -1,4 +1,5 @@
 from django.db import models
+from  user.models import Users
 
 class Station(models.Model):
 
@@ -15,7 +16,7 @@ class Station(models.Model):
     distance_school_univ = models.IntegerField(default=0)
     PopTot = models.IntegerField(default=0)
 
-    areaId = models.ForeignKey( Users, on_delete=models.PROTECT, db_column='areaId')
+    areaId = models.ForeignKey(Users, on_delete=models.PROTECT, db_column='areaId')
 
     class Meta:
         db_table = "station"  # custom table name
