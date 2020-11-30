@@ -16,12 +16,13 @@ from django.http import HttpResponse
 from django.forms import model_to_dict
 from django.shortcuts import render
 
-from account.models import Users
-from bikeapp.models import StationNow, Area, SubwayRideGetoff, SubwayTot, Weather
+from user.models import Users
+from station.models import Station
+from record.models import nowRecord, predictedRecord
+from subway.models import SubwayRideGetoff, SubwayTot
+from weather.models import Weather
 
-from custom import get_secret
 from update_weather import updateWeather
-
 
 def home(request):
 
@@ -168,7 +169,7 @@ def home(request):
     st_plus = st_dict[:5]
     st_minus = st_dict[-5:]
 
-    return render(request, 'index.html', {'api_dict': payload,
+    return render(request, 'record/index.html', {'api_dict': payload,
                                           'kakao_service_key': KAKAO_SERVICES_KEY,
                                           'st_plus': st_plus, 
                                           'st_minus': st_minus})
