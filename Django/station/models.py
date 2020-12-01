@@ -1,10 +1,11 @@
 from django.db import models
 from  user.models import Users
 
-class Station(models.Model):
+class Stations(models.Model):
 
     dataId = models.IntegerField(default=0, primary_key=True)
     stationCode = models.CharField(max_length=10)
+    stationName = models.CharField(max_length=100)
     stationLatitude = models.FloatField(max_length=20)
     stationLongitude = models.FloatField(max_length=20)
     rackTotCnt = models.IntegerField(default=0)
