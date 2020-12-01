@@ -8,6 +8,7 @@ import user.models as user_model
 
 NAME = "USER"
 
+
 class Command(BaseCommand):
     help = "read user.csv and write to Database"
 
@@ -19,12 +20,14 @@ class Command(BaseCommand):
                 if idx == 0:
                     continue
 
-                login_Id = row[0]
+                username = row[0]
+                name = None
                 password = make_password(row[1])
                 areaId = int(row[2])
 
                 obj = user_model.Users.objects.create(
-                    login_Id=login_Id,
+                    username=username,
+                    name=name,
                     password=password,
                     areaId=areaId
                 )
