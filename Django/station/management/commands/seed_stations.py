@@ -48,33 +48,33 @@ class Command(BaseCommand):
                     stationCode = str(item['stationId'])
                     stationName = str(item['stationName'])
                     dataId = int(stationName.split('.')[0])
-                    rackTotCnt = int(item['rackTotCnt'])
-                    stationLatitude = float(item['stationLatitude'])
-                    stationLongitude = float(item['stationLongitude'])
+                    rackTotCnt=int(item['rackTotCnt'])
+                    stationLatitude=float(item['stationLatitude'])
+                    stationLongitude=float(item['stationLongitude'])
 
                     if dataId in st_lst:
-                        geo_temp = geo[geo['id'] == dataId]
-                        distance_hanriver = geo_temp['distance_hanriver']
-                        distance_bikeroad = geo_temp['distance_bikeroad']
-                        distance_subway = geo_temp['distance_subway']
-                        distance_school_mid = geo_temp['distance_school_mid']
-                        distance_school_high = geo_temp['distance_school_high']
-                        distance_school_univ = geo_temp['distance_school_univ']
-                        PopTot = geo_temp['PopTot']
+                        geo_temp=geo[geo['id'] == dataId]
+                        distance_hanriver=geo_temp['distance_hanriver']
+                        distance_bikeroad=geo_temp['distance_bikeroad']
+                        distance_subway=geo_temp['distance_subway']
+                        distance_school_mid=geo_temp['distance_school_mid']
+                        distance_school_high=geo_temp['distance_school_high']
+                        distance_school_univ=geo_temp['distance_school_univ']
+                        PopTot=geo_temp['PopTot']
 
-                        df_temp = station_area[station_area['id'] == dataId]
-                        cluster = df_temp['cluster']
+                        df_temp=station_area[station_area['id'] == dataId]
+                        cluster=df_temp['cluster']
                         # matching query does not exist 방지
-                        check = Users.objects.filter(areaId=cluster)
+                        check=Users.objects.filter(areaId=cluster)
                         if len(check) > 0:
-                            areaId_obj = get_object_or_404(
+                            areaId_obj=get_object_or_404(
                                 Users, areaId=cluster)
                         else:
-                            areaId_obj = Users.objects.get(
+                            areaId_obj=Users.objects.get(
                                 areaId=44)  # 임시 default areaId
 
                         try:    # create table area data for the first time
-                            station = Stations.objects.create(
+                            station=Stations.objects.create(
                                 dataId=dataId,
                                 stationCode=stationCode,
                                 stationName=stationName,
