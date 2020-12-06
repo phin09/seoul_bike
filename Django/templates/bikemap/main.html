@@ -10,33 +10,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/stationButton.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>Document</title>
-        <style>
-            #map_wrap * {
-                margin: 0;
-                padding: 0;
-                font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
-                font-size: 12px;
-            }
-            
-            #map_wrap a,
-            #map_wrap a:hover,
-            #map_wrap a:active {
-                color: #000;
-                text-decoration: none;
-            }
-            
-            #map_wrap {
-                position: relative;
-                border-color: black;
-                
-            }
-        </style>
+        <title>Bike Map</title>
+        
     </head>
 
-    <body  x-data="{ open: true }" class="bg-gray-100 text-gray-900 antialiased font-sans bg-gray-500" 
-    x-init="$watch('open', value => value ? document.getElementById('map-wrap').style.width = 'calc(100% - 31rem)':  document.getElementById('map-wrap').style.width = 'calc(100% - 4rem)')">
-        <div id="map-wrap" class="relative inset-0 bg-gray-500 w-3/5" style="width : calc(100% - 31rem); transition-duration:0.7s" aria-hidden="true">
+    <body  x-data="{ open: true }" class="bg-white text-gray-900 antialiased font-sans" 
+    x-init="$watch('open', value => value ? document.getElementById('map-wrap').style.width = 'calc(100% - 31rem)':  document.getElementById('map-wrap').style.width = 'calc(100% - 3rem)')">
+        <div id="map-wrap" class="relative inset-0 bg-white border-r border-gray-300" style="width : calc(100% - 31rem); transition-duration:0.6s" aria-hidden="true">
             <div id="map" class="object-fill h-screen" ></div>
         </div>
 
@@ -44,7 +24,7 @@
             <div class="absolute inset-0 overflow-hidden flex">
             <section class="absolute inset-y-0 right-0 pl-10 min-w-1/2 max-w-full flex" aria-labelledby="slide-over-heading" >
                 <div class="absolute top-0 left-10 -ml-8 pt-4 flex sm:-ml-10 sm:pr-4" style="z-index:1;">
-                    <button class="rounded-md text-gray-300 border border-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" 
+                    <button class="rounded-md text-gray-300 border border-green-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" 
                     @click="open = ! open">
                     <span class="sr-only">Close panel</span>
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -57,25 +37,20 @@
                 x-transition:enter="transform transition ease-in-out duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                 x-transition:leave="transform transition ease-in-out duration-500" x-transition:leave-start ="translate-x-0" x-transition:leave-end="translate-x-full">
                 <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll" >
-                    <div class="px-4 sm:px-6">
-                    <h2 id="slide-over-heading" class="text-lg font-medium text-gray-900">
-                        Panel title
-                    </h2>
-                        <div id="sidebar" class="bg-red-400 transform transition transition-duration- translate-x-0 w-max h-screen">
-                                asdfasdfdsfgdsfgdsfgdsfgdfsg
-                        </div>
-                    </div>
-                    <div class="mt-6 relative flex-1 px-4 sm:px-6">
+                    <div class="flex mt-2 mx-10 justify-center h-1/4" ><img class="h-2/3 " src="{% static 'img/logo1.png' %}"></div>
+                    
+                        <div class="relative flex-1 px-4 sm:px-6">
                     <!-- Replace with your content -->
+                    <span>asdfasfasdf</span>
 
                     <div class="absolute inset-0 px-4 sm:px-6">
                         <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true"></div>
                     </div>
-                    <!-- /End replace -->
+                    
                     </div>
+                    <div class="mx-10 -mb-10" ><img src="{% static 'img/bottom.png' %}"></div>
                 </div>
                 </div>
-               
               
             </section>
             
