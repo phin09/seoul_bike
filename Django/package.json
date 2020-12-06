@@ -6,15 +6,17 @@
     "css": "gulp"
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-csso": "^4.0.1",
+    "create-react-app": "^4.0.1",
     "gulp-postcss": "^9.0.0",
     "gulp-sass": "^4.1.0",
     "node-sass": "^5.0.0"
   },
   "dependencies": {
+    "alpinejs": "^2.7.3",
     "autoprefixer": "^9.8.6",
-    "postcss": "^7.0.35",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "postcss": "^8.1.14",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1"
   }
 }

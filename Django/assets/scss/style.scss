@@ -2,11 +2,17 @@
 
 @tailwind components;
 
-.body :{
-    backgroundImage: : theme ({
-        
-    })
+#sidebar-open {
+  @apply rounded-xl hover:text-white focus:outline-none focus:ring-2 focus:ring-white ease-in-out duration-500 opacity-0;
 }
 
-@tailwind utilities;
+#sidebar-close {
+  @apply rounded-xl hover:text-white focus:outline-none focus:ring-2 focus:ring-white ease-in-out duration-500 opacity-0;
+}
 
+.button {
+  @apply border border-8 border-red-800;
+}
+// ounded-md hover:text-white focus:outline-none focus:ring-2
+
+@tailwind utilities;
