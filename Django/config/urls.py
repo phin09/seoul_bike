@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 import core
-import user
+from user import views as user_views
+from bikemap import views as bikemap_views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('', include('core.urls'), name='core'),
-    #path('user/', include('user.urls'), name='user' ),
+    path('login/', user_views.login, name='login'),
+    path('main/', bikemap_views.main, name='main')
 ]

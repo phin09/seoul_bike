@@ -579,22 +579,11 @@
         </div>
       </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-      <!-- Header Start -->
-      <!-- <div class="header-area header-transparrent">
-           <div class="headder-top header-sticky">
-            <a href="#"><img class="headerimg" src="./assets/img/logo_with_background.png" alt=""></a>
-                
-           </div>
-       </div> -->
-      <!-- Header End -->
-    </header>
-    <script>
-      function openForm() {
-        // var con = document.getElementById("myForm");
-        // var logo = document.getElementById("barlogo");
 
+ 
+
+    <script>
+      function openForm() {}
         if (document.getElementById("myForm").style.display == "none") {
           document.getElementById("myForm").style.display = "block";
           document.getElementById("barlogo").style.dsiplay = "block";
@@ -611,12 +600,7 @@
     </script>
     <div class="map_wrap">
       <div id="map" style="width: 100%; height: 100%">
-        <!-- <button class="open-button" onclick="openForm()">
-                        <span><img class="bar-img" src="./assets/img/barimage.png" alt=""></span>
-                    </button> -->
-
         <div class="poploc" id="centerAddr1"></div>
-
         <div class="open-form">
           <button class="open-button" onclick="openForm()">
             <img
@@ -704,148 +688,8 @@
                     </div> -->
       </div>
     </div>
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2f1a94183cc656da449464d9e1c0c58&libraries=services,clusterer,drawing"
-    ></script>
-    <script type="text/javascript">
-      var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-      center : new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
-      level : 4 // 지도의 확대 레벨
-
-      });
-
-      var positions =[];
-      var lat_temp_max = 0;
-      var lat_temp_min = 999;
-      var lng_temp_max = 0;
-      var lng_temp_min = 999;
-      {% for fixed, value, pred in api_dict %}
-      var num = {{value.parkingBikeTotCnt}} - {{pred}};
-      if (num < 0){
-      var positionsRed = [
-          {
-              content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #F17D69, #F17D69), url(../static/assets/img/red_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.dataId }}>{{ pred }}</button>',
-              latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ fixed.dataId }}</div>'
-          },
-      ];
-      positions = positions.concat(positionsRed);
-      }else if ((num >= 0) && (num <= 2)){
-      var positionsYellow = [
-          {
-              content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #FFDF8D, #FFDF8D), url(../static/assets/img/yellow_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ pred }}</button>',
-              latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;;font-family:Roboto;">{{ fixed.dataId }}</div>'
-          },
-      ];
-      positions = positions.concat(positionsYellow);
-      }else{
-      var positionsBlue = [
-          {
-              content:'<button onclick="clickStationMarker(this.id);" style="position: absolute;width: 30px;height: 30px;background: linear-gradient(0deg, #80C9C2, #80C9C2), url(../static/assets/img/green_sign.png);box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);border-radius: 50%;border: none;font-family: "Roboto", sans-serif;color: #818080;" id={{ value.stationCode }}>{{ pred }}</button>',
-              latlng: new kakao.maps.LatLng({{ fixed.stationLatitude }}, {{ fixed.stationLongitude }}),
-              title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ fixed.dataId }}</div>'
-          },
-      ];
-      positions = positions.concat(positionsBlue);
-      }
-
-      // 권역 내 중심좌표 만들기
-      var lat_value = {{ fixed.stationLatitude }};
-      if (lat_value > lat_temp_max) {
-        lat_temp_max = lat_value
-      }else if (lat_value < lat_temp_min) {
-        lat_temp_min = lat_value
-      }
-
-      var lng_value = {{ fixed.stationLongitude }};
-      if (lng_value > lng_temp_max) {
-        lng_temp_max = lng_value
-      }else if (lng_value < lng_temp_min) {
-        lng_temp_min = lng_value
-      }
-
-      {% endfor %}
-
-      var center_lat = (lat_temp_max + lat_temp_min) / 2
-      var center_lng = (lng_temp_max + lng_temp_min) / 2
-      var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
-
-      // HTML5의 geolocation으로 사용할 수 있는지 확인
-      if (navigator.geolocation) {
-
-          // GeoLocation을 이용해서 접속 위치를 얻어옴
-          navigator.geolocation.getCurrentPosition(function(position) {
-
-              var lat = position.coords.latitude; // 위도
-              var lon = position.coords.longitude; // 경도
-
-              var locPosition = new kakao.maps.LatLng(lat, lon)
-
-              // 마커와 인포윈도우를 표시합니다
-              displayMarker(locPosition);
-              // 주소-좌표 변환 객체를 생성합니다
-              var geocoder = new kakao.maps.services.Geocoder();
-
-              var result = geocoder.coord2RegionCode(lon, lat,  displayCenterInfo);
-
-              // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수
-              function displayCenterInfo(result, status) {
-                  if (status === kakao.maps.services.Status.OK) {
-                      var infoDiv = document.getElementById('centerAddr1');
-
-                      for(var i = 0; i < result.length; i++) {
-                          // 행정동의 region_type 값은 'H' 이므로
-                          if (result[i].region_type === 'H') {
-                              infoDiv.innerHTML = result[i].address_name;
-                              break;
-                          }
-                      }
-                  }
-              }
-
-            });
-
-      } else { // HTML5의 GeoLocation을 사용할 수 없을 때 마커 표시 위치와 인포윈도우 내용을 설정
-
-          var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
-
-
-          displayMarker(locPosition);
-      }
-
-      for (var i = 0; i < positions.length; i ++) {
-              var customOverlay1 = new kakao.maps.CustomOverlay({
-                          content: positions[i].content,
-                          position: positions[i].latlng,
-                          map: map
-              });
-
-
-              var customOverlay2 = new kakao.maps.CustomOverlay({
-                  content: positions[i].title,
-                  position: positions[i].latlng,
-                  yAnchor: 1,
-                  xAnchor: 0.2,
-                  map: map
-              });
-      }
-      // 지도에 마커와 인포윈도우를 표시하는 함수
-      function displayMarker(locPosition) {
-
-          // 마커를 생성합니다
-          var marker = new kakao.maps.Marker({
-              map: map,
-              position: locPosition
-          });
-
-          // 지도 중심좌표를 권역 내 중심좌표 위치로 변경
-          map.setCenter(centerPosition);
-
-
-            };
-    </script>
+   
+  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <!-- 검색기능 -->
     <script>
@@ -900,7 +744,6 @@
               var roadviewContainer = document.getElementById('roadview3'); //로드뷰를 표시할 div
               var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
               var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-
               var stPosition = new kakao.maps.LatLng(parseFloat(stationLatitude), parseFloat(stationLongitude));
               // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
               roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {

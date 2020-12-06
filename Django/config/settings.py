@@ -40,11 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'record.apps.RecordConfig',
+    'bikemap.apps.BikemapConfig',
     'user.apps.UserConfig',
     'core.apps.CoreConfig',
     'station.apps.StationConfig',
-    'subway.apps.SubwayConfig',
     'weather.apps.WeatherConfig'
 ]
 
@@ -122,14 +121,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS=3000
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'bikeapp', 'static')
+    os.path.join(BASE_DIR, 'static')
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'

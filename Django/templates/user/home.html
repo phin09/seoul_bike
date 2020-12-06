@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Home</title>
+</head>
+
+<body class="bg-cover bg-fixed" style="background-image: url('{% static 'img/main.png' %}')" >
+    <header class="grid justify-items-end" >
+        <div><img src="{% static 'img/logo_with_background.png' %}"></div>
+    </header>
+
+    <div class="bg-white rounded-2xl w-96 pt-16 pb-10 h-1/3 ml-16 mt-10 px-10 shadow-xl border border-gray-200" >
+        <img src="{% static 'img/logo1.png' %}" >
+        <form action="{% url 'login' %}"  method="post" class="flex flex-col items-center pt-12 pb-2" >
+            {% csrf_token %}
+            <input type="usernamess" placeholder="ID" id="username" name="username" class="py-px my-px border-b w-3/4 h-10 pl-2 p border-gray-400"/>
+            <input type="password" placeholder="Password" id="password" name="password" class="my-3 border-b w-3/4 h-10 pl-2 px-4 border-gray-400"/>
+            <button type="submit" class=" h-10 rounded-lg bg-green-400 my-6 px-4 border w-2/3 text-white"> Login</button>
+            {% if error  %} <span class ="text-red-500 font-medium text-sm">{{error}}</span>{% endif %}     
+        </form>
+    </div>   
+</div>
+
+</body>
+</html>
