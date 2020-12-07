@@ -15,7 +15,7 @@ from django.utils import dateformat, timezone
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
-from record.models import StationNow
+from bikemap.models import StationNow
 from station.models import Stations
 from custom import get_secret
 
