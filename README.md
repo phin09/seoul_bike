@@ -22,8 +22,8 @@ $ python manage.py makemigrations (앱이름)
 $ python manage.py migrate
 ```
 * 초기 데이터 넣기 - 각 1회만 실행   
-create_users.py   
-create_station_now.py   
-create_area.py   
+python manage.py seed_users
+Python manage.py seed_stations
+Python update_station_now_and_daily_station.py
 * table 내 데이터 삭제시 주의   
 삭제 후 fk 관계에 주의해 삭제한 table과 CASCADE 걸려있는 table의 create 파일 실행   

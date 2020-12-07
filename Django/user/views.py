@@ -29,9 +29,8 @@ def login(request):
 
             # 위 정보들로 인스턴스 생성
                 if check_password(password, user.password):
-                    # request.session['user'] = bikeuser.id
                     request.session['user'] = user.username
-                    return redirect('../main')
+                    return redirect('../main',request )
                 else:
                     context['error'] = "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다."
             except models.Users.DoesNotExist:

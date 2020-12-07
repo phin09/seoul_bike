@@ -19,9 +19,11 @@ from django.urls import path, include
 import core
 from user import views as user_views
 from bikemap import views as bikemap_views
+from station import views as station_views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('login/', user_views.login, name='login'),
-    path('main/', bikemap_views.main, name='main')
+    path('main/', bikemap_views.main, name='main'),
+    path('station/', include('station.urls'), name='station')
 ]
