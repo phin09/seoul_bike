@@ -7,7 +7,6 @@ from core import models as core_models
 
 # Create your models here.
 
-
 class StationNow(core_models.TimeStampedModel):
 
     ''' Definition of StationNow Model '''

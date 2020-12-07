@@ -49,8 +49,7 @@ def main(request):
     parkTot = [StationNow.objects.select_related("station").get(station=station) for station in stations]#정참조 하는 방식을 사용
    
 
-
-    return render(request, 'record/main.html', context={
+    return render(request, 'bikemap/main.html', context={
         'kakao_api_key': KAKAO_API_KEY,
         'stations' : stations,
     })

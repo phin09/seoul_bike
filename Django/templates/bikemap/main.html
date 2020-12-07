@@ -39,13 +39,13 @@
                 <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll" >
                     <div class="flex mt-2 mx-10 justify-center h-1/4" ><img class="h-2/3 " src="{% static 'img/logo1.png' %}"></div>
                     
-                        <div class="relative flex-1 px-4 sm:px-6">
-                    <!-- Replace with your content -->
-                    <span>asdfasfasdf</span>
+                        <div id='stInfo' class="relative flex-1 px-4 sm:px-6" style="transition-duration-0.5s">
+                            <!-- Replace with your content -->
+                            <span>asdfasfasdf</span>
 
-                    <div class="absolute inset-0 px-4 sm:px-6">
-                        <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true"></div>
-                    </div>
+                            <div class="absolute inset-0 px-4 sm:px-6">
+                                <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true"></div>
+                            </div>
                     
                     </div>
                     <div class="mx-10 -mb-10" ><img src="{% static 'img/bottom.png' %}"></div>
@@ -61,18 +61,62 @@
     </body>
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey={{kakao_api_key}}&libraries=services,clusterer,drawing"></script>
     <!-- <script type="text/javascript" src="{% static 'js/kakao_api1.js' %}"></script> -->
     <script type="text/javascript">
-        function toggle(open) {
-            if (open){
-                open=false;
-            } else{
-                open=true;
-            }
+        function stationInfo(id) {
+            $.ajax({
+            url: "{% url 'station:stInfo' %}",
+            type:'post',
+            data: {
+                'pk': id,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+            success: function (response) {
+                //status code에 따른 에러처리
+                var station = JSON.parse(response["station"]);
+                var Fields = station[0]["fields"];
+                
+                var latitude = Fields["stationLatitude"];
+                var longitude = Fields["stationLongitude"];
+
+                var parkTot = JSON.parse(response["parkTot"]);
+                var parkingBikeTotCnt = parkTot[0];
+                var updated_at = parkTot[1];
+
+                $ ('#stInfo').empty();
+                $('#stInfo').append(
+                `
+                    <div class="flex flex-col"> 
+                        <span>거치소 이름 :${Fields["stationName"]}</span>
+                        <div id="roadview" class="my-5" style='width:80%;height:250px;'></div>
+                        <span>전체 거치대수 :${Fields["rackTotCnt"]}</span>
+                        <span>현재 대수 : ${parkingBikeTotCnt}</span>
+                        <span>기준 시간 : ${updated_at}</span>
+                    </div>
+                `
+                )
+                //take Road view image from Kakao API
+                var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 id가 roadview인 div태그에 로드뷰 이미지 생성
+                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+                var stPosition = new kakao.maps.LatLng(parseFloat(latitude), parseFloat(longitude));
+
+                roadviewClient.getNearestPanoId(stPosition, 50, function(panoId) {
+                    roadview.setPanoId(panoId,stPosition); //panoId와 중심좌표를 통해 로드뷰 실행
+                });
+            },
+        error: function (response) {
+            // 응답이 없을 때 에러 처리
+        }
+        })
+
         };
-    
+        
+
     </script>
+   
     <script type="text/javascript">
         var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
             center: new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
@@ -92,7 +136,7 @@
         {% for station in stations %}
 
         var marker = [{
-            content: '<button onclick="clickStationMarker(this.id);" class="redSt" id={{ station.dataId }}>{{ 1 }}</button>',
+            content: '<button onclick="stationInfo(this.id);" class="redSt" id={{ station.dataId }}>{{ 1 }}</button>',
             latlng: new kakao.maps.LatLng({{station.stationLatitude}}, {{station.stationLongitude}}),
             title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ station.dataId }}</div>'
         }, ];
