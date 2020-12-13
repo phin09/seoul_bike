@@ -13,7 +13,8 @@ from core import models as core_models
 def stationInfo(request):
     pk = request.POST.get('pk')
     station = models.Stations.objects.get(pk=pk)
-    parkTot = bikemap_models.StationNow.objects.values_list('parkingBikeTotCnt', 'created_at', named=True).get(station=station)
+    parkTot = bikemap_models.StationNow.objects.values_list('parkingBikeTotCnt', 'created_at', named=True).filter(station=station)
+    parkTot = parkTot.order_by('created_at').last()
     parkTot = json.dumps(parkTot, cls=DjangoJSONEncoder)
     #object 유무에 따른 에러처리
     ser_station = serialize('json', [station,])

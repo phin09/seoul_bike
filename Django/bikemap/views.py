@@ -26,37 +26,19 @@ from update_weather import updateWeather
 
 def main(request):
 
-    # # 로그인 session
-
-    # global user_area
-    # user_id = request.session.get('user').split('e')[1]
-    # # login시 입력한 아이디 값에서 숫자 추출
-    # # login시 입력한 아이디 값과 primary key(username)가 일치하는 object를 [dict]로 가져옴
-
-    # if user_id:
-    #     user_area_lst = [model_to_dict(user) for user in Users.objects.filter(pk=user_id)]
-    #     user_area = user_area_lst[0]['areaId']   # areaId from table users
-
-    # map.html로 넘길 kakao api key 불러오기
-    # KAKAO_KEY = "//dapi.kakao.com/v2/maps/sdk.js?appkey=" + get_secret('secrets.json', "KAKAO_KEY")
     KAKAO_API_KEY = os.environ.get("KAKAO_KEY")
-
 
     # st_dict는 지속적으로 업데이트 되는 값(parkingBikeTotCnt), fixed_dict는 위경도 등의 고정값니다
     areaId = int(request.session.get('user')[4:])
     stations = Stations.objects.filter(areaId=areaId)
-    print(stations[0])
-    parkTot = [StationNow.objects.select_related("station").get(station=station) for station in stations]#정참조 하는 방식을 사용
+    parkTot = [StationNow.objects.filter(station=station).order_by('created_at').last() for station in stations]
    
 
     return render(request, 'bikemap/main.html', context={
         'kakao_api_key': KAKAO_API_KEY,
-        'stations' : stations,
+        'bikeCounts' : parkTot
     })
     
-
- 
-
     # 데이터 업데이트를 위해서 shared, 예측값 등 출력할 column 추가해야 됨
 
     ''' Prediction '''

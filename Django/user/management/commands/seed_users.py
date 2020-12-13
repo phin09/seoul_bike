@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = "read user.csv and write to Database"
 
     def handle(self, *args, **kwargs):
-        with open('./users.csv', newline='') as csvfile:
+        with open('initial_data/users.csv', newline='') as csvfile:
             rows = csv.reader(csvfile, delimiter=',', quotechar='|')
 
             for idx, row in enumerate(rows):

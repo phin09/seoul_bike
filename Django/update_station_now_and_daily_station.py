@@ -17,7 +17,7 @@ django.setup()
 
 from bikemap.models import StationNow
 from station.models import Stations
-from custom import get_secret
+
 
 # 따릉이 api 호출
 SEOUL_KEY = os.environ.get("SEOUL_KEY")
@@ -38,7 +38,6 @@ try:
             dataId = int(stationName.split('.')[0])
             try:  # 대여소가 api에도 table area에도 있는 경우 -> update
                 check_obj = Stations.objects.get(pk=dataId)
-                print("Yes")
                 stationCode = str(item['stationId'])
                 parkingBikeTotCnt = int(item['parkingBikeTotCnt'])
 

@@ -1,38 +1,35 @@
-.redSt{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(0deg, #F17D69, #F17D69), 
-    url("{% static '/img/red_sign.png' %}");
-    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    border: none;
-    font-family: "Roboto", sans-serif;
-    color: #818080;
+.redSt {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url("{% static '/img/red_sign.png' %}");
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #818080;
 }
 
-.yellowSt{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(0deg, #F17D69, #F17D69), 
-    url("{% static '/img/yellow_sign.png' %}");
-    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    border: none;
-    font-family: "Roboto", sans-serif;
-    color: #818080;
+.yellowSt {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #818080;
 }
 
-.blueSt{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(0deg, #F17D69, #F17D69), 
-    url("{% static '/img/blue_sign.png' %}");
-    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    border: none;
-    font-family: "Roboto", sans-serif;
-    color: #818080;
+.blueSt {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url("{% static 'img/green_sign.png' %}");
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  color: #818080;
 }

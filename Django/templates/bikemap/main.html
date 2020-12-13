@@ -10,6 +10,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/stationButton.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+            .redSt{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: url("../static/img/red_sign.png");
+                box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                border: none;
+                font-family: "Roboto", sans-serif;
+                color: #818080;
+            }
+
+            .yellowSt{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: url("../static/img/yellow_sign.png");
+                box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                border: none;
+                font-family: "Roboto", sans-serif;
+                color: #818080;
+            }
+
+            .blueSt{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: url("../static/img/green_sign.png");
+                box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                border: none;
+                font-family: "Roboto", sans-serif;
+                color: #818080;
+            }
+        </style>
         <title>Bike Map</title>
         
     </head>
@@ -36,18 +73,19 @@
                 <div class="relative w-screen max-w-md" x-show="open" 
                 x-transition:enter="transform transition ease-in-out duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                 x-transition:leave="transform transition ease-in-out duration-500" x-transition:leave-start ="translate-x-0" x-transition:leave-end="translate-x-full">
-                <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll" >
+                <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll border border-gray-300" >
                     <div class="flex mt-2 mx-10 justify-center h-1/4" ><img class="h-2/3 " src="{% static 'img/logo1.png' %}"></div>
-                    
-                        <div id='stInfo' class="relative flex-1 px-4 sm:px-6" style="transition-duration-0.5s">
+                        <div id='stInfo' class="relative flex-1 px-4 sm:px-6 " style="transition-duration-0.5s">
                             <!-- Replace with your content -->
-                            <span>asdfasfasdf</span>
-
                             <div class="absolute inset-0 px-4 sm:px-6">
-                                <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true"></div>
+                                <div class="h-full border-2 border-dashed border-gray-200 flex flex-col pr-8" aria-hidden="true">
+                                    <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-green-400 py-5 rounded-lg mt-5 mx-5 text-xl font-bold hover:bg-green-300">센터로 가기</a>
+                                    <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-green-400 py-5 rounded-lg mt-5 mx-5 text-xl font-bold hover:bg-green-300">길찾기</a>
+                                    <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-green-400 py-5 rounded-lg mt-5 mx-5 text-xl font-bold hover:bg-green-300">재배치 하기</a>
+                                </div>
                             </div>
-                    
                     </div>
+
                     <div class="mx-10 -mb-10" ><img src="{% static 'img/bottom.png' %}"></div>
                 </div>
                 </div>
@@ -88,12 +126,19 @@
                 $ ('#stInfo').empty();
                 $('#stInfo').append(
                 `
-                    <div class="flex flex-col"> 
-                        <span>거치소 이름 :${Fields["stationName"]}</span>
-                        <div id="roadview" class="my-5" style='width:80%;height:250px;'></div>
-                        <span>전체 거치대수 :${Fields["rackTotCnt"]}</span>
-                        <span>현재 대수 : ${parkingBikeTotCnt}</span>
-                        <span>기준 시간 : ${updated_at}</span>
+                    <div class="flex flex-col -mt-10"> 
+                        <span class="text-2xl font-medium">${Fields["stationName"]}</span>
+                        <div id="roadview" class="my-5 ml-8 mr-10" style='width:95%;height:300px;'></div>
+                        <div class="ml-5 flex flex-col">
+                            <span class="text-lg">전체 거치대수 : ${Fields["rackTotCnt"]} 대</span>
+                            <span class="text-lg">현재 대수 : ${parkingBikeTotCnt} 대</span>
+                            <span class="text-lg">기준 시간 : ${updated_at}</span>
+                        </div>
+                        <div class="mx-5 flex flex-col items-center">
+                        <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-red-400 py-5 rounded-lg mt-10 mx-3 text-xl font-bold hover:bg-red-300">출발지로 설정</a>
+                        <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-green-400 py-5 rounded-lg mt-3 mx-3 text-xl font-bold hover:bg-green-300">목적지로 설정</a>
+                        <a href="#" class ="h-16 border border-gray-200 w-full text-center text-white bg-yellow-400 py-5 rounded-lg mt-3 mx-3 text-xl font-bold hover:bg-yellow-300">고장 신고</a>
+                        </div>
                     </div>
                 `
                 )
@@ -118,49 +163,55 @@
     </script>
    
     <script type="text/javascript">
+
+    
+        var center_lat = 0;
+        var center_lng = 0;
+
+     
+        {% for bikeCount in bikeCounts %}
+            center_lat = center_lat+ {{bikeCount.station.stationLatitude}};
+            center_lng = center_lng+ {{bikeCount.station.stationLongitude}};
+        {% endfor %}
+        var centerPosition = new kakao.maps.LatLng(center_lat/20, center_lng/20);
         var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-            center: new kakao.maps.LatLng(37.566680, 126.9784147), // 지도의 중심좌표
-            level: 4 // 지도의 확대 레벨
+            center:centerPosition, // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
         });
 
-        var positions = [];
-        var lat_temp_max = 0;
-        var lat_temp_min = 999;
-        var lng_temp_max = 0;
-        var lng_temp_min = 999;
 
-        var center_lat = (lat_temp_max + lat_temp_min) / 2
-        var center_lng = (lng_temp_max + lng_temp_min) / 2
-        var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
+        {% for bikeCount in bikeCounts %}
+            var bikeCount = {{bikeCount.parkingBikeTotCnt}};
+            if (bikeCount < 1){
+                var content = '<button onclick="stationInfo(this.id);" class="redSt" id={{ bikeCount.station.dataId }}>{{ bikeCount.parkingBikeTotCnt  }}</button>';
+            } else if(bikeCount <= 5){
+                var content = '<button onclick="stationInfo(this.id);" class="yellowSt" id={{ bikeCount.station.dataId }}>{{ bikeCount.parkingBikeTotCnt  }}</button>';
+            } else{
+                var content = '<button onclick="stationInfo(this.id);" class="blueSt" id={{ bikeCount.station.dataId }}>{{ bikeCount.parkingBikeTotCnt  }}</button>';
+            }
 
-        {% for station in stations %}
+            var position = {
+                content: content,
+                latlng: new kakao.maps.LatLng({{bikeCount.station.stationLatitude}}, {{bikeCount.station.stationLongitude}}),
+                title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ station.dataId }}</div>'
+            };
 
-        var marker = [{
-            content: '<button onclick="stationInfo(this.id);" class="redSt" id={{ station.dataId }}>{{ 1 }}</button>',
-            latlng: new kakao.maps.LatLng({{station.stationLatitude}}, {{station.stationLongitude}}),
-            title: '<div style="font-size:1.2em;font-weight: bold;color: #5E5B55;font-family:Roboto;">{{ station.dataId }}</div>'
-        }, ];
-        positions = positions.concat(marker)
-
-        {% endfor %}
-
-        console.log(positions)
-
-        for (var i = 0; i < positions.length; i++) {
             var customOverlay1 = new kakao.maps.CustomOverlay({
-                content: positions[i].content,
-                position: positions[i].latlng,
+                content: position.content,
+                position: position.latlng,
                 map: map
             });
 
             var customOverlay2 = new kakao.maps.CustomOverlay({
-                content: positions[i].title,
-                position: positions[i].latlng,
+                content: position.title,
+                position: position.latlng,
                 yAnchor: 1,
                 xAnchor: 0.2,
                 map: map
             });
-        }
+            
+        {% endfor %}
+
     </script>
 
 </html>

@@ -225,10 +225,8 @@ var centerPosition = new kakao.maps.LatLng(center_lat, center_lng)
 
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
 if (navigator.geolocation) {
-
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
-
         var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
 
@@ -245,7 +243,6 @@ if (navigator.geolocation) {
         function displayCenterInfo(result, status) {
             if (status === kakao.maps.services.Status.OK) {
                 var infoDiv = document.getElementById('centerAddr1');
-
                 for(var i = 0; i < result.length; i++) {
                     // 행정동의 region_type 값은 'H' 이므로
                     if (result[i].region_type === 'H') {

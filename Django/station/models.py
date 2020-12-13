@@ -17,7 +17,7 @@ class Stations(models.Model):
     distance_school_univ = models.IntegerField(default=0)
     PopTot = models.IntegerField(default=0)
 
-    areaId = models.ForeignKey(Users, on_delete=models.PROTECT, db_column='areaId')
+    areaId = models.ForeignKey(Users,related_name="stations", on_delete=models.PROTECT, db_column='areaId')
 
     class Meta:
         db_table = "station"  # custom table name

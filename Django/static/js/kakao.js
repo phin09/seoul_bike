@@ -6,10 +6,7 @@
 
     var num = {{.parkingBikeTotCnt}} - {{pred}};
     var colorStation = StationColor(num, station)
-
     positions = positions.concat(positionsRed);
-
-  
 }
 
 // 권역 내 중심좌표 만들기
