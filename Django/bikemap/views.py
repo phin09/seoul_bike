@@ -21,7 +21,7 @@ from django.shortcuts import render
 
 from station.models import Stations
 from bikemap.models import StationNow
-from update_weather import updateWeather
+from weather.models import Weather
 
 
 def main(request):
@@ -63,7 +63,6 @@ def main(request):
         hour=now.hour+1
     )
     if not weather:
-        updateWeather()
         weather = Weather.objects.filter(
             year=now.year,
             month=now.month,
